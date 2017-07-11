@@ -6,7 +6,7 @@ class LocationsController < ApplicationController
       @locations << Location.new
     end
   end
-  
+
   # params[:locations] holds an array of the two addresses
   # here, we want to create each location, set it to @locations_array
   # then, pass that to Midpoint.calculate
