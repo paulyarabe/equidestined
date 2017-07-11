@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Equidestined</title>
+    <!-- MATERIAL ICONS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- APPLE -->
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <!-- MATERIAL STYLES -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css">
+    <!-- GOOGLE FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400|Raleway" rel="stylesheet">
+    <!-- CUSTOM STYLES -->
+    <%= stylesheet_link_tag "application" %>
+  </head>
+
+  <body>
+
+    <!-- HEADER  -->
+    <div class="nav-wrapper">
+		 <nav class="bg-primary" role="navigation">
+  			<div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo"><a href="/">Equidestined</a></a>
+    			  <ul class="right hide-on-med-and-down dt-nav">
+      				<li><a href="#">Login</a></li>
+      			  </ul>
+
+              <!-- MOBILE NAV -->
+      			  <ul id="nav-mobile" class="side-nav">
+      				<li><a class="sn-link" href="#">Login</a></li>
+    			  </ul>
+    			  <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="zmdi zmdi-menu"></i></a>
+    			</div>
+  		  </nav>
+	  </div>
+    <!-- /HEADER  -->
+
+    <!-- MAIN  -->
+    <div class="container">
+      <%= yield %>
+    </div>
+    <!-- /MAIN  -->
+
+
+
+    <!-- FOOTER -->
+    <!-- <footer class="page-footer bg-secondary">
+         <div class="container">
+           <div class="row">
+             <div class="col l6 s12">
+               <h5>Footer Content</h5>
+             </div>
+             <div class="col l4 offset-l2 s12">
+               <h5 class="dk-txt">Links</h5>
+               <ul>
+                 <li><a href="#!">Link</a></li>
+               </ul>
+             </div>
+           </div>
+         </div>
+         <div class="footer-copyright">
+           <div class="container dk-txt">
+           © 2017 Equidestined
+           <a class="right dk-txt" href="#!">Link</a>
+           </div>
+         </div>
+       </footer> -->
+
+    <!-- /FOOTER -->
+
+    <!-- JQUERY - THIS FILE IS NEEDED FOR MATERIALIZE.JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- MATERIALIZE.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
+    <!-- SCRIPT -->
+    <%= javascript_include_tag "application" %>
+
+  </body>
+</html>
