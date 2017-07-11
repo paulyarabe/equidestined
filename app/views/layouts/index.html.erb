@@ -70,7 +70,39 @@
     <!-- MATERIALIZE.JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
     <!-- SCRIPT -->
+
+
+    <script src="//maps.google.com/maps/api/js?key=AIzaSyDnqcczTMv_b43f8WvEKG1KH8n_raxpeq8"></script>
+    <script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
+
     <%= javascript_include_tag "application" %>
+
+    <script type="text/javascript">
+    handler = Gmaps.build('Google');
+    handler.buildMap(
+      {
+        provider: {
+          disableDefaultUI: true,
+          zoom: 12
+          // here you can pass other Google Maps API options here
+        },
+        internal: {
+          id: 'map'
+        }
+      },
+      function() {
+        markers = handler.addMarkers([
+          {
+            "lat": <%=Midpoint.last.latitude%>,
+            "lng": <%=Midpoint.last.longitude%>,
+            "infowindow": 'The midpoint of <%=Location.all[-2].address %> and <%=Location.all[-1].address%> is here'
+          },
+        ]);
+        handler.bounds.extendWith(markers);
+        handler.map.centerOn({lat: <%=Midpoint.last.latitude%>, lng: <%=Midpoint.last.longitude%>})
+      }
+    );
+    </script>
 
   </body>
 </html>
