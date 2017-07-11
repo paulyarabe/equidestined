@@ -1,0 +1,8 @@
+<div class="locations-container z-depth-5">
+  <h3 class="txt-primary">The midpoint of</h3>
+  <p><%= Location.all[-2].address %><br> and<br>
+  <%= Location.all[-1].address %> is </p>
+  <h6><%= Midpoint.last.address %></h6>
+  <span>(Venues coming soon)</span>
+  <span class="float-right"><%= link_to "Find more midpoints", locations_path %></span>
+</div>

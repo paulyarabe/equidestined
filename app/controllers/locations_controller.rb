@@ -1,40 +1,29 @@
 class LocationsController < ApplicationController
-
-  def new
-    @location = Location.new
-  end
-
-  def create
-    @location = Location.create(location_params)
-    redirect_to location_path(@location)
-  end
-
-  def edit
-    @location = Location.find(params[:id])
-  end
-
-  def update
-    @location = Location.find(params[:id])
-    redirect_to location_path(@location)
-  end
-
-  def show
-    @location = Location.find(params[:id])
-  end
-
+  # basically, the home (consisting of the search boxes); 2.times becasue MVP
   def index
-    @locations = Location.all
+    @locations = []
+    2.times do
+      @locations << Location.new
+    end
   end
-
-  def destroy
-    @location = Location.find(params[:id])
-    @location.destroy
+  
+  # params[:locations] holds an array of the two addresses
+  # here, we want to create each location, set it to @locations_array
+  # then, pass that to Midpoint.calculate
+  def create
+    @locations_array = params[:locations].collect do |location|
+      Location.create(location_params(location))
+    end
+    @midpoint = Midpoint.calculate(@locations_array)
+    redirect_to results_path
+  end
+  # here, we basically get taken to results.html.erb, call Midpoint.last.blah
+  # to get the last search's midpoint
+  def results
   end
 
   private
-
-  def location_params
-    params.require(:location).permit(:address, :name, :latitude, :longitude)
+  def location_params(my_params)
+    my_params.permit(:address)
   end
-
 end

@@ -1,15 +1,76 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+/* Style sheets are ordered by specificity(convention). HTML tags will be first, followed by classes(have a "." infront of them), then followed by ID's (have a "#" infront of them). */
+body {
+  background:url('https://images.unsplash.com/photo-1473042904451-00171c69419d?dpr=1&auto=format&fit=crop&w=1500&h=969&q=80&cs=tinysrgb&crop=');
+  background-position:center;
+  background-size:cover;
+}
+
+nav {
+  box-shadow:none;
+}
+
+label {
+  font-size:1.1em;
+}
+nav ul a,
+a {
+  font-size:1.3em;
+}
+
+h3 {
+  margin-top:0!important;
+  font-family: 'Raleway', serif;
+}
+
+h6 {
+  font-size:1.4em;
+}
+/* Any HTML tag that has this class will have x colored background */
+.bg-primary {
+  background:#26a69a;
+}
+
+.bg-secondary {
+  background:#a7ffeb;
+  color:#474644!important;
+}
+/* Any HTML tag that has this class will have x colored text */
+.txt-primary {
+  color:#26a69a;
+}
+
+.txt-secondary {
+  color:#a7ffeb;
+}
+
+/* Dark text */
+.dk-txt {
+  color:#474644;
+}
+
+/* Light text */
+.light-txt {
+  color:#ffffff;
+}
+
+.main-nav {
+  background:transparent;
+}
+
+.float-right {
+  float:right;
+}
+
+.locations-container {
+  width:500px;
+  left:0;
+  right:0;
+  margin:auto;
+  margin-top:12%;
+  padding:20px 40px;
+  background:rgba(255,255,255, .9);
+}
+
+.locations-container p {
+  font-size:1.1em!important;
+}
