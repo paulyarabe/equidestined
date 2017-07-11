@@ -1,21 +1,17 @@
 # == Schema Information
 #
-# Table name: midpoints
+# Table name: users
 #
 #  id         :integer          not null, primary key
-#  latitude   :float
-#  longitude  :float
+#  name       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  address    :string
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  latitude: 
-  longitude: 1.5
+  name: MyString
 
 two:
-  latitude: 
-  longitude: 1.5
+  name: MyString

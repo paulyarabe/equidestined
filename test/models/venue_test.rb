@@ -1,21 +1,21 @@
 # == Schema Information
 #
-# Table name: midpoints
+# Table name: venues
 #
 #  id         :integer          not null, primary key
 #  latitude   :float
 #  longitude  :float
+#  address    :string
+#  name       :string
+#  category   :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  address    :string
 #
 
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+require 'test_helper'
 
-one:
-  latitude: 
-  longitude: 1.5
-
-two:
-  latitude: 
-  longitude: 1.5
+class VenueTest < ActiveSupport::TestCase
+  # test "the truth" do
+  #   assert true
+  # end
+end

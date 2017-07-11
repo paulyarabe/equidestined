@@ -1,0 +1,26 @@
+# == Schema Information
+#
+# Table name: searches
+#
+#  id          :integer          not null, primary key
+#  user_id     :integer
+#  name        :string
+#  notes       :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  midpoint_id :integer
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  midpoint_id: 1
+  user_id: 1
+  name: MyString
+  notes: MyString
+
+two:
+  midpoint_id: 1
+  user_id: 1
+  name: MyString
+  notes: MyString

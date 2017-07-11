@@ -1,21 +1,20 @@
 # == Schema Information
 #
-# Table name: midpoints
+# Table name: search_venues
 #
 #  id         :integer          not null, primary key
-#  latitude   :float
-#  longitude  :float
+#  search_id  :integer
+#  venue_id   :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  address    :string
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  latitude: 
-  longitude: 1.5
+  search_id: 1
+  venue_id: 1
 
 two:
-  latitude: 
-  longitude: 1.5
+  search_id: 1
+  venue_id: 1

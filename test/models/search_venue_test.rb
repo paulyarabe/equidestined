@@ -1,18 +1,17 @@
 # == Schema Information
 #
-# Table name: midpoints
+# Table name: search_venues
 #
 #  id         :integer          not null, primary key
-#  latitude   :float
-#  longitude  :float
+#  search_id  :integer
+#  venue_id   :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  address    :string
 #
 
 require 'test_helper'
 
-class MidpointTest < ActiveSupport::TestCase
+class SearchVenueTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

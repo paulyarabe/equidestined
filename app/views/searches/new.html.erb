@@ -1,0 +1,6 @@
+<%= form_for @search do |person_form| %>
+  <%= fields_for @search.locations do |location_form| %>
+    <%= location_form.text_field :address %>
+  <% end %>
+
+<% end %>

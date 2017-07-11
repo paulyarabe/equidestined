@@ -1,19 +1,26 @@
+# == Schema Information
+#
+# Table name: midpoints
+#
+#  id         :integer          not null, primary key
+#  latitude   :float
+#  longitude  :float
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  address    :string
+#
+
 class Midpoint < ApplicationRecord
+
   reverse_geocoded_by :latitude, :longitude
   after_validation :reverse_geocode  # auto-fetch address
 
-  # eventually we want Location.find_by_something(params[something])
-  # Location.all[0] is my home
-  # Location.all[2] is Flatiron School
-  def get_midpoint
-    @home = Geokit::LatLng.new(Location.all[0].latitude, Location.all[0].longitude)
-    @work = Geokit::LatLng.new(Location.all[2].latitude, Location.all[2].longitude)
-    @latitude = @home.midpoint_to(@work).lat
-    @longitude = @home.midpoint_to(@work).lng
-  end
+  # NOTE at present, this model exists mostly because it's easier to separate geocoding and reverse geocoding. Midpoint objects are stored to the midpoint table as a way of reducing the number of API calls (if this midpoint has been used before, we don't need an API call) but are not otherwise used by the app after being stored.
 
-  def store_midpoint
-    Midpoint.create(latitude: @latitude, longitude: @longitude)
+  def self.calculate(locations)
+      # takes in an array of Location objects and returns a Midpoint object with the latitude and longitude of the geographic center/midpoint
+      coords = Geocoder::Calculations.geographic_center(locations)
+      self.find_by(latitude: coords[0], longitude: coords[1]) || self.create(latitude: coords[0], longitude: coords[1])
   end
 
 end
