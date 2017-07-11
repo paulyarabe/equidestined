@@ -20,7 +20,7 @@ class Location < ApplicationRecord
   has_many :searches, through: :search_locations
 
   geocoded_by :address
-  validates :address, uniqueness: true
+  validates :address, presence: true
   after_validation :geocode, if: :address_changed?
 
   def get_coordinates_from_api
