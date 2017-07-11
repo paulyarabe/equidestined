@@ -18,14 +18,6 @@
 # NOTE - location.distance - gets distance in miles from your location -- see screenshot/railscast for details
 #
 #
-# TODO maybe make directory class to hold locations/venues a user has searched? like a join table probs
-#      simple "add to my locations" and "add to my venues" links/buttons for now and ability to view user's venues
-#      for now, user id will be 1 for all of this functionality?
-
-# TODO ASAP Figure out how to populate our database with usable locations, i.e. those that aren't residences
-#      Does this mean maybe we do need a separate midpoint class and a separate table or do we just add a field to Location that identifies
-#      each location as "user-specific," "destination," "midpoint," etc? Could also be a "public/private" flag? Idk
-
 # NOTE: Geocoding by full address and not doing so until after validation are conmon with rails apps, per geocoder railscast
 #       The latitude and longitude will update each time the location is saved to the db, IF the address has changed.
 #
