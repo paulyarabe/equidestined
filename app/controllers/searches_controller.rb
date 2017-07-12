@@ -11,6 +11,9 @@ class SearchesController < ApplicationController
 
   def new
     @search = Search.new
+    if logged_in?
+      @current_user = User.find(session[:user_id])
+    end
     2.times {@search.locations << Location.new}
     #byebug
   end
@@ -18,7 +21,6 @@ class SearchesController < ApplicationController
   def create
     # TODO add validation so the same search isn't saved to the
     # db more than once? then put create in an if statement
-    byebug
     @search = Search.create(search_params)
     # hardcoding user_id to 1 at this time
     @search.user_id = 1
