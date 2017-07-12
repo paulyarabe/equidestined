@@ -31,12 +31,12 @@ handler.buildMap(
   function() {
     markers = handler.addMarkers([
       {
-        "lat":<%=Midpoint.last.latitude%>,
-        "lng":<%= Midpoint.last.longitude%>,
+        "lat":40,
+        "lng":70,
         "infowindow": "The midpoint of <%=Location.all[-2].address %> and <%=Location.all[-1].address%> is here "
       },
     ]);
     handler.bounds.extendWith(markers);
-    handler.map.centerOn({lat: <%=Midpoint.last.latitude%>,lng: <%= Midpoint.last.longitude%>})
+    handler.map.centerOn({lat: 40,lng: 70})
   }
 );

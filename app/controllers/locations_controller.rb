@@ -1,6 +1,9 @@
 class LocationsController < ApplicationController
+
+
   # basically, the home (consisting of the search boxes); 2.times becasue MVP
   def index
+    @current_user = User.find_by(params[:email])
     @locations = []
     2.times do
       @locations << Location.new
