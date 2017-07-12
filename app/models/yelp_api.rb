@@ -22,15 +22,22 @@ class YelpAPI
     "#{token['token_type']} #{token['access_token']}"
   end
 
+  def self.add_or_update_business(params)
+    business =  Midpoint.find_or_create_by(latitude: params[:latitude], longitude: params[:longitude], name: params[:name])
+    business.update(rating: params[:rating])
+    business.update(category: params[:category]) if business.category.nil?
+  end
+
   def self.save_businesses_to_db(api_data, term)
-    api_data["businesses"].map do |business|
+    api_data["businesses"].each do |business|
       params = {
         latitude: business["coordinates"]["latitude"],
         longitude: business["coordinates"]["longitude"],
         name: business["name"],
-        category: term
+        category: term,
+        rating: business["rating"]
       }
-      Midpoint.create(params) unless Midpoint.find_by(latitude: params[:latitude], longitude: params[:longitude], name: params[:name])
+      add_or_update_business(params)
     end
   end
 

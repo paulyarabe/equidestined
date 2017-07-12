@@ -11,4 +11,4 @@ Midpoint.calculate([loc1, loc2])
 
 YelpAPI.add_businesses_to_db("New York, NY", "restaurants")
 YelpAPI.add_businesses_to_db("New York, NY", "parks")
-YelpAPI.add_businesses_to_db("New York, NY", "bars")
+#YelpAPI.add_businesses_to_db("New York, NY", "bars")

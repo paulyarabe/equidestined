@@ -22,12 +22,13 @@ class Midpoint < ApplicationRecord
   # NOTE Midpoint objects are stored to the midpoint table as a way of reducing the number of API calls (if this midpoint has been used before, we don't need an API call), with a category of "midpoint". This will distinguish them from venues when we look at nearbys.
 
   def self.calculate(locations)
-      # takes in an array of Location objects and returns a Midpoint object with the latitude and longitude of the geographic center/midpoint
-      coords = Geocoder::Calculations.geographic_center(locations)
-      self.find_by(latitude: coords[0], longitude: coords[1]) || self.create(latitude: coords[0], longitude: coords[1])
+    # takes in an array of Location objects and returns a Midpoint object with the latitude and longitude of the geographic center/midpoint
+    coords = Geocoder::Calculations.geographic_center(locations)
+    self.find_or_create_by(latitude: coords[0], longitude: coords[1])
   end
 
   def find_venues(radius=10, category="restaurants")
+    # TODO filter results by rating
     self.nearbys(radius).select{|venue| !venue.category.nil? && venue.category != "midpoint"}
   end
 
