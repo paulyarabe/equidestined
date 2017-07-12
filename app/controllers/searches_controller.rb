@@ -11,13 +11,14 @@ class SearchesController < ApplicationController
 
   def new
     @search = Search.new
-    @location = Location.new
-    #@search.locations = [Location.new, Location.new]
+    2.times {@search.locations << Location.new}
+    #byebug
   end
 
   def create
     # TODO add validation so the same search isn't saved to the
     # db more than once? then put create in an if statement
+    byebug
     @search = Search.create(search_params)
     # hardcoding user_id to 1 at this time
     @search.user_id = 1

@@ -33,8 +33,8 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'binding_of_caller'
-gem 'better_errors'
+#gem 'binding_of_caller'
+#gem 'better_errors'
 gem 'geocoder'
 gem 'json'
 gem 'http'
