@@ -23,8 +23,8 @@
 		 <nav class="main-nav" role="navigation">
   			<div class="nav-wrapper container">
               <!-- MOBILE NAV -->
-      			  <ul id="nav-mobile" class="side-nav">
-      				<li><a class="sn-link" href="#">Login</a></li>
+      			<ul id="nav-mobile" class="side-nav">
+      				<li><%= link_to "Home", locations_path %></li>
     			  </ul>
     			  <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="zmdi zmdi-menu"></i></a>
     			</div>
@@ -38,33 +38,6 @@
     </div>
     <!-- /MAIN  -->
 
-
-
-    <!-- FOOTER -->
-    <!-- <footer class="page-footer bg-secondary">
-         <div class="container">
-           <div class="row">
-             <div class="col l6 s12">
-               <h5>Footer Content</h5>
-             </div>
-             <div class="col l4 offset-l2 s12">
-               <h5 class="dk-txt">Links</h5>
-               <ul>
-                 <li><a href="#!">Link</a></li>
-               </ul>
-             </div>
-           </div>
-         </div>
-         <div class="footer-copyright">
-           <div class="container dk-txt">
-           © 2017 Equidestined
-           <a class="right dk-txt" href="#!">Link</a>
-           </div>
-         </div>
-       </footer> -->
-
-    <!-- /FOOTER -->
-
     <!-- JQUERY - THIS FILE IS NEEDED FOR MATERIALIZE.JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- MATERIALIZE.JS -->
@@ -76,33 +49,6 @@
     <script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
 
     <%= javascript_include_tag "application" %>
-
-    <script type="text/javascript">
-    handler = Gmaps.build('Google');
-    handler.buildMap(
-      {
-        provider: {
-          disableDefaultUI: true,
-          zoom: 12
-          // here you can pass other Google Maps API options here
-        },
-        internal: {
-          id: 'map'
-        }
-      },
-      function() {
-        markers = handler.addMarkers([
-          {
-            "lat": <%=Midpoint.last.latitude%>,
-            "lng": <%=Midpoint.last.longitude%>,
-            "infowindow": 'The midpoint of <%=Location.all[-2].address %> and <%=Location.all[-1].address%> is here'
-          },
-        ]);
-        handler.bounds.extendWith(markers);
-        handler.map.centerOn({lat: <%=Midpoint.last.latitude%>, lng: <%=Midpoint.last.longitude%>})
-      }
-    );
-    </script>
 
   </body>
 </html>

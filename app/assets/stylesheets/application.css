@@ -1,8 +1,7 @@
 /* Style sheets are ordered by specificity(convention). HTML tags will be first, followed by classes(have a "." infront of them), then followed by ID's (have a "#" infront of them). */
 body {
-  background:url('https://images.unsplash.com/photo-1473042904451-00171c69419d?dpr=1&auto=format&fit=crop&w=1500&h=969&q=80&cs=tinysrgb&crop=');
-  background-position:center;
-  background-size:cover;
+  background:#1279be url('https://images.unsplash.com/photo-1473042904451-00171c69419d?dpr=1&auto=format&fit=crop&w=1500&h=969&q=80&cs=tinysrgb&crop=')no-repeat;
+  background-size:2000px 1000px;
 }
 
 nav {
@@ -25,6 +24,7 @@ h3 {
 h6 {
   font-size:1.4em;
 }
+
 /* Any HTML tag that has this class will have x colored background */
 .bg-primary {
   background:#26a69a;
@@ -66,11 +66,30 @@ h6 {
   left:0;
   right:0;
   margin:auto;
-  margin-top:12%;
+  margin-top:10%;
   padding:20px 40px;
   background:rgba(255,255,255, .9);
 }
 
+.map-width {
+  width:700px
+}
+
 .locations-container p {
   font-size:1.1em!important;
+}
+
+#map {
+  opacity:.8;
+}
+
+#locations__address:focus {
+  color:#26a69a;
+}
+
+@media (max-width:768px) {
+  .locations-container {
+    width:100%;
+  }
+
 }

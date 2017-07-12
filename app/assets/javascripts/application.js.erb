@@ -15,3 +15,28 @@
 //= require_tree .
 //= require underscore
 //= require gmaps/google
+
+handler = Gmaps.build('Google');
+handler.buildMap(
+  {
+    provider: {
+      disableDefaultUI: true,
+      zoom: 12
+      // here you can pass other Google Maps API options here
+    },
+    internal: {
+      id: 'map'
+    }
+  },
+  function() {
+    markers = handler.addMarkers([
+      {
+        "lat":<%=Midpoint.last.latitude%>,
+        "lng":<%= Midpoint.last.longitude%>,
+        "infowindow": "The midpoint of <%=Location.all[-2].address %> and <%=Location.all[-1].address%> is here "
+      },
+    ]);
+    handler.bounds.extendWith(markers);
+    handler.map.centerOn({lat: <%=Midpoint.last.latitude%>,lng: <%= Midpoint.last.longitude%>})
+  }
+);
