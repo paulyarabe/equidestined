@@ -23,9 +23,4 @@ class Location < ApplicationRecord
   validates :address, presence: true
   after_validation :geocode, if: :address_changed?
 
-  def get_coordinates_from_api
-    # This method can be called to return the coordinates of a location without saving it to the DB -- not sure as yet if it's needed
-    Geocoder.search(self.address)[0].data["geometry"]["location"]
-  end
-
 end

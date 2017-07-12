@@ -8,6 +8,8 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  address    :string
+#  name       :string
+#  category   :string           default("midpoint")
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

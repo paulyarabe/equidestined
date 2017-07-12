@@ -36,9 +36,14 @@ gem 'jbuilder', '~> 2.5'
 gem 'binding_of_caller'
 gem 'better_errors'
 gem 'geocoder'
+gem 'json'
+gem 'http'
+
 gem 'httparty'
 gem 'annotate'
 gem 'figaro'
+gem 'faraday'
+gem 'oauth2'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
