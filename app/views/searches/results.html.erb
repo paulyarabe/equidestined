@@ -1,0 +1,11 @@
+<div class="searches-container map-width z-depth-5">
+  <h3 class="txt-primary">Here's the midpoint!</h3>
+    <h6><%= @search.midpoint.address %></h6>
+    <span>(Venues coming soon)</span>
+    
+  <div style='width: 100%;'>
+    <div id="map" style='width: 100%; height: 300px;'></div>
+  </div>
+
+  <span class="float-right"><%= link_to "Find more midpoints", new_search_path %></span>
+</div>

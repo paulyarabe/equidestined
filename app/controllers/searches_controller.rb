@@ -1,45 +1,26 @@
 class SearchesController < ApplicationController
-  helper_method :save
 
-  # NOTE
-  # search = Search.new
-  # search.locations = [loc1, loc2] -- or shovel one at a time
-  # Midpoint.calculate(search.locations) -- gets midpoint and stores
-  # need logic to store the locations? to allow search to be saved?
-  # default user_id to 1 until authentication piece is complete
-  #
+  # TODO possibly add join table for venues returned by a search so those can be saved along with the search (just saving midpoint atm)?
+  # would this saving happen in here or in model?
 
   def new
     @search = Search.new
     2.times {@search.locations << Location.new}
-    #byebug
   end
 
   def create
     # TODO add validation so the same search isn't saved to the
-    # db more than once? then put create in an if statement
-    byebug
-    @search = Search.create(search_params)
-    # hardcoding user_id to 1 at this time
-    @search.user_id = 1
+    # db more than once for the same user? then put create in an if statement
+    @search = Search.new
+    @search.locations = params[:search][:location].map {|location| Location.find_or_create_by(address: location[:address])}
+    @search.midpoint = Midpoint.calculate(@search.locations)
     @search.save
-    redirect_to search_path(@search)
-  end
-
-  def edit
-    @search = Search.find(params[:id])
-  end
-
-  def update
-    # NOTE will this be used? if so, need to add vaidation
-    # and enclose in an if statement
-    @search = Search.find(params[:id])
-    @search.update(search_params)
     redirect_to search_path(@search)
   end
 
   def show
     @search = Search.find(params[:id])
+    render 'results.html.erb'
   end
 
   def index

@@ -12,8 +12,10 @@
 #
 
 class Search < ApplicationRecord
-  belongs_to :user
-  has_one :midpoint
+  belongs_to :midpoint
   has_many :search_locations
   has_many :locations, through: :search_locations
+
+  validates :midpoint_id, presence: true
+
 end

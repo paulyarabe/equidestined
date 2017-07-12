@@ -5,11 +5,12 @@
 #  id         :integer          not null, primary key
 #  latitude   :float
 #  longitude  :float
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
 #  address    :string
 #  name       :string
-#  category   :string           default("midpoint")
+#  category   :string
+#  rating     :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
 #
 
 require 'test_helper'
