@@ -46,9 +46,10 @@ GEM
     arel (8.0.0)
 <<<<<<< HEAD
 <<<<<<< HEAD
-    bcrypt (3.1.11)
+<<<<<<< HEAD
 =======
->>>>>>> 659f5e6bdf9dda7b239d9b3704c8aa356cd56ea4
+>>>>>>> User
+    bcrypt (3.1.11)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
@@ -210,9 +211,10 @@ DEPENDENCIES
   annotate
 <<<<<<< HEAD
 <<<<<<< HEAD
-  bcrypt (~> 3.1.7)
+<<<<<<< HEAD
 =======
->>>>>>> 659f5e6bdf9dda7b239d9b3704c8aa356cd56ea4
+>>>>>>> User
+  bcrypt (~> 3.1.7)
   better_errors
   binding_of_caller
 =======
