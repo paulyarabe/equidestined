@@ -19,6 +19,9 @@ Geocoder.configure(
   # Calculation options
   # units: :mi,                 # :km for kilometers or :mi for miles
   # distances: :linear          # :spherical or :linear
+  #
+  # NOTE - we can switch between Bing and Google maps APIs
+  #
   timeout: 15,
   lookup: :google,
   api_key: ENV["GOOGLE_API_KEY"]
