@@ -7,7 +7,7 @@ class SearchesController < ApplicationController
   # Midpoint.calculate(search.locations) -- gets midpoint and stores
   # need logic to store the locations? to allow search to be saved?
   # default user_id to 1 until authentication piece is complete
-  # TODO figure out how to denote search.locations in form_for?
+  #
 
   def new
     @search = Search.new

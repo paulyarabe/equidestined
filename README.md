@@ -22,16 +22,6 @@
 #       The latitude and longitude will update each time the location is saved to the db, IF the address has changed.
 #
 
-
-Google Maps Geocoding:
-Try to get this up and running without using the Geocoder gem?
-API key is AIzaSyDbzfZrZ25TP3MRBe4P9COPbzc6Q-Koonk
-
-Yelp Fusion API:
-May be able to use this to populate our venues database.
-API client id is RVjEUfdZtNQb6L7oTVk3wA
-API client secret is 8oZAgqdGExg7xgguZ96fPtxTBvP8RA4lAiOoSzNo25S19XrsY2VatbxEnCNQUcpv
-
 ***********************************************************************
 
 This README would normally document whatever steps are necessary to get the
