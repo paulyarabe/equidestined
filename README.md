@@ -22,11 +22,6 @@
 #       The latitude and longitude will update each time the location is saved to the db, IF the address has changed.
 #
 
-
-Google Maps Geocoding:
-Try to get this up and running without using the Geocoder gem?
-API key is AIzaSyDbzfZrZ25TP3MRBe4P9COPbzc6Q-Koonk
-
 ***********************************************************************
 
 This README would normally document whatever steps are necessary to get the
