@@ -13,6 +13,7 @@
 
 class Search < ApplicationRecord
   belongs_to :midpoint
+  belongs_to :user 
   has_many :search_locations
   has_many :locations, through: :search_locations
 

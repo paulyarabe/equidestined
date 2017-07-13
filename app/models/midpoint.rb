@@ -31,9 +31,21 @@ class Midpoint < ApplicationRecord
     self.find_or_create_by(latitude: coords[0], longitude: coords[1])
   end
 
-  def find_venues(radius=10, category="restaurants")
-    # TODO filter results by rating
+  def find_venues(radius=0.1, category="all")
+    # TODO add ability to narrow search by category
     self.nearbys(radius).select{|venue| !venue.category.nil? && venue.category != "midpoint"}
+  end
+
+  def narrow_venues_by_rating(venue_list)
+    # returns 5 best rated venues
+    venue_list.sort_by {|venue| venue.rating}.last(5)
+  end
+
+  def get_venue_list
+    # TODO add code to call with wider radius if you get 0 venues
+    list = find_venues
+    return list if (1..5) === list.count
+    narrow_venues_by_rating(list)
   end
 
 end
