@@ -1,13 +1,20 @@
+<h5>Welcome <%=@current_user.name%>!</h5>
 
-<div class="locations-container z-depth-5">
-  <h3 class="txt-primary">Equidestined</h3>
-  <p>Enter two addresses below to find the midpoint!</p>
-  <%= form_for @search do |search_form| %>
-    <%= @search.locations.each do |location| %>
-      <%= search_form.fields_for location, index: location.id do |location_form|%>
-        <%= location_form.text_field :address %>
+  <div class="locations-container z-depth-5">
+    <h3 class="txt-primary">Equidestined</h3>
+    <p>Enter two addresses below to find the midpoint!</p>
+    <%= form_for @search do |search_form| %>
+      <%= @search.locations.each do |location| %>
+        <%= search_form.fields_for location, index: location.id do |location_form|%>
+          <%= location_form.text_field :address %>
+        <% end %>
       <% end %>
-    <% end %>
     <br><%= submit_tag('Get Midpoint!', :class=>"waves-effect waves-light btn") %>
   <% end %>
 </div>
+
+<% if logged_in? %>
+  <%= link_to "logout", logout_path, method: :delete, data: {confirm: "Are you sure?"}%>
+<% else %>
+    <%= link_to "log in", login_path%>
+<% end %>
