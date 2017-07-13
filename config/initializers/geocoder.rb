@@ -22,7 +22,7 @@ Geocoder.configure(
   #
   # NOTE - we can switch between Bing and Google maps APIs
   #
-  timeout: 15,
+  timeout: 45,
   lookup: :google,
   api_key: ENV["GOOGLE_API_KEY"]
   )

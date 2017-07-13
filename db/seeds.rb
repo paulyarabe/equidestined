@@ -8,11 +8,11 @@
 loc1 = Location.create(address: "50 W 34th St, New York, NY 10001", name: "sarah's apartment", category: "home")
 loc2 = Location.create(address: "11 Broadway, New York, NY", name: "flatiron", category: "school")
 Midpoint.calculate([loc1, loc2])
-
-YelpAPI.get_businesses_from_api("New York, NY", offset=0, term="restaurants")
-YelpAPI.get_businesses_from_api("New York, NY", offset=0, term="parks")
+# search = Search.new.locations = [loc1, loc2]
+# search.midpoint = Midpoint.calculate(search.locations)
+# search.save
 
 # Populate all database information
-#YelpAPI.add_businesses_to_db("New York, NY", "restaurants")
-#YelpAPI.add_businesses_to_db("New York, NY", "parks")
+YelpAPI.add_businesses_to_db("New York, NY", "restaurants")
+YelpAPI.add_businesses_to_db("New York, NY", "parks")
 #YelpAPI.add_businesses_to_db("New York, NY", "bars")

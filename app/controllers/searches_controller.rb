@@ -5,6 +5,7 @@ class SearchesController < ApplicationController
 
   def new
     @search = Search.new
+    @search.midpoint = Midpoint.first
     if logged_in?
       @current_user = User.find(session[:user_id])
     end
@@ -14,26 +15,17 @@ class SearchesController < ApplicationController
   def create
     # TODO add validation so the same search isn't saved to the
     # db more than once for the same user? then put create in an if statement
-    @search = Search.new.locations = params[:search][:location].map {|location| Location.find_or_create_by(address: location[:address])}
+    @search = Search.new
+    params[:search][:location].each {|location| @search.locations << Location.find_or_create_by(address: location[:address])}
     @search.midpoint = Midpoint.calculate(@search.locations)
-    # TODO venues code goes here
     @search.save
     redirect_to search_path(@search)
   end
 
   def show
-    # TODO research buildmarkers and gmaps4rails and how to use
     @search = Search.find(params[:id])
+    @venues = @search.midpoint.get_venue_list
     render 'results.html.erb'
-  end
-
-  def index
-    @searches = Search.all
-  end
-
-  def destroy
-    @search = Search.find(params[:id])
-    @search.destroy
   end
 
   private
