@@ -13,6 +13,9 @@
 #  updated_at :datetime         not null
 #
 
+# TODO - info on calling Google API directly
+# https://www.sitepoint.com/use-google-maps-rails/
+
 class Midpoint < ApplicationRecord
 
   reverse_geocoded_by :latitude, :longitude
