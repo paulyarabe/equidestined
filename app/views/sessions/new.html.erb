@@ -1,10 +1,14 @@
 <div class="main-container z-depth-5">
   <h3 class="txt-primary">Login</h3>
   <%= form_tag sessions_path do %>
-  <%= label_tag :email %>
-  <%= email_field_tag :email %>
-  <%= label_tag :password %>
-  <%= password_field_tag :password %>
+    <div class="input-field col s12">
+      <%= email_field_tag :email %>
+      <%= label_tag :email %>
+    </div>
+    <div class="input-field col s12">
+      <%= password_field_tag :password %>
+      <%= label_tag :password %>
+    </div>
   <%= submit_tag("Log in", :class=>"waves-effect waves-light btn")%>
   <% end %>
 </div>
