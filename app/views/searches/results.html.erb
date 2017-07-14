@@ -16,13 +16,15 @@
 <script src="//maps.google.com/maps/api/js?key=AIzaSyDnqcczTMv_b43f8WvEKG1KH8n_raxpeq8"></script>
 <script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
 
+
+
 <script type="text/javascript">
   handler = Gmaps.build('Google');
   handler.buildMap(
     {
       provider: {
         disableDefaultUI: true,
-        zoom: 14
+        zoom: 15
         // here you can pass other Google Maps API options here
       },
       internal: {
@@ -40,6 +42,14 @@
             "infowindow": "The midpoint of <%=@search.locations[0].address%>, <%=@search.locations[1].address%>, and <%=@search.locations[2].address%> is here "
           <% end %>
         },
+        <% @venues.each do |venue| %>
+          <% @venue_location = Location.create(address: venue.address)%>
+            {
+              "lat":<%= @venue_location.latitude%>,
+              "lng":<%= @venue_location.longitude%>,
+              "infowindow": "<%=venue.name%> is at <%=@venue_location.address%>"
+            },
+          <% end %>
       ]);
       handler.bounds.extendWith(markers);
       handler.map.centerOn({lat: <%= @search.midpoint.latitude %>,lng: <%= @search.midpoint.longitude %>})
