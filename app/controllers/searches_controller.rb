@@ -11,8 +11,6 @@ class SearchesController < ApplicationController
     3.times {@search.locations << Location.new}
   end
 
-  # [locA, locB, locC=nil]
-
   def create
     # TODO add validation so the same search isn't saved to the
     # db more than once for the same user? then put create in an if statement
