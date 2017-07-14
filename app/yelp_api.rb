@@ -41,20 +41,20 @@ class YelpAPI  < ApplicationRecord
     end
   end
 
-  def self.get_businesses_from_api(location=DEFAULT_LOCATION, offset=0, term="restaurants")
+  def self.get_businesses_from_api(location=DEFAULT_LOCATION, offset=0, term="restaurants", limit=SEARCH_LIMIT)
     params = {
       location: location,
       term: term,
-      limit: SEARCH_LIMIT,
+      limit: limit,
       offset: offset
     }
     api_data = HTTP.auth(get_auth_token).get("#{API_HOST}#{SEARCH_PATH}", params: params).parse
     save_businesses_to_db(api_data, term) unless api_data.nil?
   end
 
-  def self.add_businesses_to_db(location=DEFAULT_LOCATION, term="restaurants")
+  def self.add_businesses_to_db(location=DEFAULT_LOCATION, term="restaurants", limit=1000)
     offset = 0
-    while offset < 1000 do
+    while offset < limit do
       get_businesses_from_api(location, offset, term)
       offset += 50
     end

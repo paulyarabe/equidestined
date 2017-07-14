@@ -31,8 +31,13 @@ class Midpoint < ApplicationRecord
     self.find_or_create_by(latitude: coords[0], longitude: coords[1])
   end
 
+  def self.distance_between(loc1, loc2)
+    Geocoder::Calculations.distance_between(loc1, loc2)
+  end
+
   def find_venues(radius=0.1, category="all")
     # TODO add ability to narrow search by category
+    # TODO could call yelp API in real time to get venues by address instead of using nearbys? limit search to 5 results by default
     self.nearbys(radius).select{|venue| !venue.category.nil? && venue.category != "midpoint"}
   end
 
@@ -41,11 +46,29 @@ class Midpoint < ApplicationRecord
     venue_list.sort_by {|venue| venue.rating}.last(5)
   end
 
+  def widen_search_radius(venue_list)
+    # widest_radius = distance between 2 locations * 0.05
+    # may want to move this code and the other distance/venue codes to search model or search controller or application controller as helper method?
+  end
+
   def get_venue_list
     # TODO add code to call with wider radius if you get 0 venues
+    # largest distance 1 mile or 5% of distance between the two points
     list = find_venues
     return list if (1..5) === list.count
     narrow_venues_by_rating(list)
+  end
+
+  def get_venue_list_new
+    # TODO once this is working, widen search radius if don't get at least 2-3
+    case find_venues.count
+    when (1..5)
+      find_venues
+    when 0
+      widen_search_radius(find_venues)
+    else
+      narrow_venues_by_rating(find_venues)
+    end
   end
 
 end

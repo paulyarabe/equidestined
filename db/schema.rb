@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170713012109) do
+ActiveRecord::Schema.define(version: 20170713211003) do
 
   create_table "locations", force: :cascade do |t|
     t.float "latitude"
@@ -40,6 +40,13 @@ ActiveRecord::Schema.define(version: 20170713012109) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "search_venues", force: :cascade do |t|
+    t.integer "search_id"
+    t.integer "venue_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "searches", force: :cascade do |t|
     t.integer "user_id"
     t.string "name"
@@ -53,6 +60,18 @@ ActiveRecord::Schema.define(version: 20170713012109) do
     t.string "name"
     t.string "email"
     t.string "password_digest"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "venues", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.string "category"
+    t.integer "rating"
+    t.float "latitude"
+    t.float "longitude"
+    t.string "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

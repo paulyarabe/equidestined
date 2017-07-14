@@ -3,11 +3,13 @@
 # Table name: venues
 #
 #  id         :integer          not null, primary key
+#  name       :string
+#  address    :string
+#  category   :string
+#  rating     :integer
 #  latitude   :float
 #  longitude  :float
-#  address    :string
-#  name       :string
-#  category   :string
+#  url        :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
