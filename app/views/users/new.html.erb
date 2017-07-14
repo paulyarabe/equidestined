@@ -1,14 +1,22 @@
 <div class="main-container z-depth-5">
   <h3 class="txt-primary">Create User</h3>
   <%= form_for @user do |f| %>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-    <%= f.label :email %>
-    <%= f.email_field :email %>
-    <%= f.label :password %>
-    <%= f.password_field :password %>
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation %>
-    <%= f.submit :class=>"waves-effect waves-light btn"%>
+    <div class="input-field col s12">
+      <%= f.text_field :name %>
+      <%= f.label :name %>
+    </div>
+    <div class="input-field col s12">
+      <%= f.email_field :email %>
+      <%= f.label :email %>
+    </div>
+    <div class="input-field col s12">
+      <%= f.password_field :password %>
+      <%= f.label :password %>
+    </div>
+    <div class="input-field col s12">
+      <%= f.password_field :password_confirmation %>
+      <%= f.label :password_confirmation %>
+    </div>
+      <%= f.submit :class=>"waves-effect waves-light btn"%>
   <% end %>
 </div>

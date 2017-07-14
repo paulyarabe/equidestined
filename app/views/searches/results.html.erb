@@ -34,7 +34,11 @@
         {
           "lat":<%= @search.midpoint.latitude %>,
           "lng":<%= @search.midpoint.longitude %>,
-          "infowindow": "The midpoint of <%=@search.locations[0].address%> and <%=@search.locations[1].address%> is here "
+          <% if @search.locations.length == 2 %>
+            "infowindow": "The midpoint of <%=@search.locations[0].address%> and <%=@search.locations[1].address%> is here "
+          <% else %>
+            "infowindow": "The midpoint of <%=@search.locations[0].address%>, <%=@search.locations[1].address%>, and <%=@search.locations[2].address%> is here "
+          <% end %>
         },
       ]);
       handler.bounds.extendWith(markers);

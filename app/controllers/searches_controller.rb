@@ -8,15 +8,20 @@ class SearchesController < ApplicationController
     if logged_in?
       @current_user = User.find(session[:user_id])
     end
-    2.times {@search.locations << Location.new}
+    3.times {@search.locations << Location.new}
   end
+
+  # [locA, locB, locC=nil]
 
   def create
     # TODO add validation so the same search isn't saved to the
     # db more than once for the same user? then put create in an if statement
     @search = Search.new
-    params[:search][:location].each {|location| @search.locations << Location.find_or_create_by(address: location[:address])}
-
+    params[:search][:location].each do |location|
+      if !(location[:address] == "")
+        @search.locations << Location.find_or_create_by(address: location[:address])
+      end
+    end
     @search.midpoint = Midpoint.calculate(@search.locations)
     @search.save
     redirect_to search_path(@search)
