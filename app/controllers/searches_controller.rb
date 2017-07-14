@@ -24,7 +24,7 @@ class SearchesController < ApplicationController
 
   def show
     @search = Search.find(params[:id])
-    @venues = @search.midpoint.get_venue_list
+    @venues = Venue.find_near(@search.midpoint)
     render 'results.html.erb'
   end
 

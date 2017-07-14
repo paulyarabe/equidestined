@@ -36,12 +36,16 @@ class Venue < ApplicationRecord
     "#{token['token_type']} #{token['access_token']}"
   end
 
+  def update_db_fields(params)
+    self.update(address: params[:address]) if self.latitude.nil? || self.longitude.nil?
+    self.update(category: params[:category]) if self.category.nil?
+    self.update(rating: params[:rating], url: params[:url])
+    self
+  end
+
   def self.add_or_update_db_row(params)
     init_params = {latitude: params[:latitude], longitude: params[:longitude], name: params[:name]}
-    venue =  Venue.find_or_create_by(init_params)
-    venue.update(rating: params[:rating], url: params[:url])
-    venue.update(category: params[:category]) if venue.category.nil?
-    venue
+    Venue.find_or_create_by(init_params).update_db_fields(params)
   end
 
   def self.save_all_to_db(api_data, term)
@@ -50,6 +54,7 @@ class Venue < ApplicationRecord
         latitude: business["coordinates"]["latitude"],
         longitude: business["coordinates"]["longitude"],
         name: business["name"],
+        address: business["location"]["display_address"].join(", "),
         category: term,
         url: business["url"],
         rating: business["rating"]
@@ -58,7 +63,7 @@ class Venue < ApplicationRecord
     end
   end
 
-  def self.pull_from_api(midpoint, params)
+  def self.pull_from_api(midpoint, options={})
     # Takes a midpoint object and an optional hash with the values noted below.
     # Returns an array of geocoded Venue instances, saving any to the db that aren't already in it.
     # It's possible to get back no venues depending on the search radius provided.
@@ -77,7 +82,7 @@ class Venue < ApplicationRecord
       radius: options[:radius] || 805
     }
     api_data = HTTP.auth(get_auth_token).get("#{API_HOST}#{SEARCH_PATH}", params: params).parse
-    save_all_to_db(api_data, (params[:term]) unless api_data.nil?
+    save_all_to_db(api_data, params[:term]) unless api_data.nil?
   end
 
   def self.find_near(midpoint, options={})
@@ -99,15 +104,11 @@ class Venue < ApplicationRecord
 
     while params[:radius] < 3220 do
       venues = pull_from_api(midpoint, params)
-      return venues unless venues.empty?
+      return venues unless venues.count < 5
       params[:radius] += 805
     end
 
     venues
   end
-  
-  # TODO modify code above to take an options hash
-  # then we can pass in limit, term, radius etc
-  # then need to add code to widen search radius if we don't get results
 
 end

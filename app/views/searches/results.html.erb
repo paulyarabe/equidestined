@@ -3,7 +3,7 @@
     <h6><%= @search.midpoint.address %></h6>
     <ul><strong>Nearby venues:</strong>
       <% @venues.each do |venue| %>
-        <li><%= venue.name %> - <%= venue.address %> </li>
+        <li><%= link_to venue.name, venue.url, target: :_blank %> - <%= venue.address %> </li>
       <% end %>
     </ul>
   <div style='width: 100%;'>
