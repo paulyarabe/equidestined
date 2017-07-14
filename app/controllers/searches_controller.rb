@@ -5,7 +5,6 @@ class SearchesController < ApplicationController
 
   def new
     @search = Search.new
-    @search.midpoint = Midpoint.first
     if logged_in?
       @current_user = User.find(session[:user_id])
     end
@@ -17,6 +16,7 @@ class SearchesController < ApplicationController
     # db more than once for the same user? then put create in an if statement
     @search = Search.new
     params[:search][:location].each {|location| @search.locations << Location.find_or_create_by(address: location[:address])}
+
     @search.midpoint = Midpoint.calculate(@search.locations)
     @search.save
     redirect_to search_path(@search)

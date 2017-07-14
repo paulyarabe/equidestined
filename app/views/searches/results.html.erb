@@ -10,13 +10,11 @@
     <div id="map" style='width: 100%; height: 300px;'></div>
   </div>
 
-  <span class="float-right"><%= link_to "Find more midpoints", new_search_path %></span>
+  <p class="mb-0"><%= link_to "Find more midpoints", new_search_path %></p>
 </div>
 
 <script src="//maps.google.com/maps/api/js?key=AIzaSyDnqcczTMv_b43f8WvEKG1KH8n_raxpeq8"></script>
 <script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
-
-<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
 <script type="text/javascript">
   handler = Gmaps.build('Google');
@@ -24,7 +22,7 @@
     {
       provider: {
         disableDefaultUI: true,
-        zoom: 12
+        zoom: 14
         // here you can pass other Google Maps API options here
       },
       internal: {
@@ -34,13 +32,13 @@
     function() {
       markers = handler.addMarkers([
         {
-          "lat":<%=@search.midpoint.latitude%>,
-          "lng":<%=@search.midpoint.longitude%>,
+          "lat":<%= @search.midpoint.latitude %>,
+          "lng":<%= @search.midpoint.longitude %>,
           "infowindow": "The midpoint of <%=@search.locations[0].address%> and <%=@search.locations[1].address%> is here "
         },
       ]);
       handler.bounds.extendWith(markers);
-      handler.map.centerOn({lat: <%=@search.midpoint.latitude%>,lng: <%=@search.midpoint.longitude%>})
+      handler.map.centerOn({lat: <%= @search.midpoint.latitude %>,lng: <%= @search.midpoint.longitude %>})
     }
   );
 </script>
