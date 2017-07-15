@@ -1,20 +1,14 @@
 class SearchesController < ApplicationController
 
-  # TODO possibly add join table for venues returned by a search so those can be saved along with the search (just saving midpoint atm)?
-  # would this saving happen in here or in model?
-
   def new
     @search = Search.new
-    if logged_in?
-      @current_user = User.find(session[:user_id])
-    end
+    @search.user_id = current_user.id if logged_in?
     3.times {@search.locations << Location.new}
   end
 
   def create
-    # TODO add validation so the same search isn't saved to the
-    # db more than once for the same user? then put create in an if statement
     @search = Search.new
+    @search.user_id = current_user.id if logged_in?
     params[:search][:location].each do |location|
       if !(location[:address] == "")
         @search.locations << Location.find_or_create_by(address: location[:address])
@@ -29,6 +23,10 @@ class SearchesController < ApplicationController
     @search = Search.find(params[:id])
     @venues = Venue.find_near(@search.midpoint)
     render 'results.html.erb'
+  end
+
+  def index
+    @searches = Search.all
   end
 
   private
