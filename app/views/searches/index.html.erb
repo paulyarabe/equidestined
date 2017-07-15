@@ -1,0 +1,18 @@
+<div class= "container">
+
+  <div class="main-container index-attributes z-depth-5">
+    <div class="static">
+        <h3 class="txt-primary">Equidestined</h3>
+      </div>
+        <h6>See what others are searching for!</h6>
+        <% @searches.each do |search| %>
+          <ul><strong>Locations searched:</strong>
+            <% search.locations.each do |location| %>
+              <li><%= location.address %> </li>
+            <% end %>
+          </ul>
+          <strong>Midpoint:</strong>
+          <%= search.midpoint.address %>
+        <% end %>
+  </div>
+</div>
