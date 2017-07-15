@@ -47,7 +47,7 @@
             {
               "lat":<%= @venue_location.latitude%>,
               "lng":<%= @venue_location.longitude%>,
-              "infowindow": "<%=venue.name%> is at <%=@venue_location.address%>"
+              "infowindow": "<a href=<%=venue.url%>><%=venue.name%></a> is at <%=@venue_location.address%>"
             },
           <% end %>
       ]);
