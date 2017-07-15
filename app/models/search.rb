@@ -19,5 +19,10 @@ class Search < ApplicationRecord
   has_many :venues, through: :search_venues
 
   validates :midpoint_id, presence: true
+  validate :has_at_least_two_locations?, on: :create
+
+  def has_at_least_two_locations?
+    errors.add(:locations, "Please enter at least two addresses.") unless self.locations.select{|location| !location.address.nil? && !location.address.empty?}.count >= 2
+  end
 
 end

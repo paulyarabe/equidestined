@@ -8,20 +8,16 @@ class SearchesController < ApplicationController
 
   def create
     @search = Search.new
-    if @search.locations.length == 1
-      # TODO does this return work or should it be redirect_to? also need to add error msg if possible
-      return new_search_path
-    else
-      params[:search][:location].each do |location|
-        if !(location[:address] == "")
-          @search.locations << Location.find_or_create_by(address: location[:address])
-        end
-      end
-    end
+    # TODO potentially add in ability to display error in @search.errors[:locations][1]
+    params[:search][:location].each {|location| @search.locations << Location.find_or_create_by(address: location[:address]) unless location[:address].empty?}
     @search.midpoint = Midpoint.calculate(@search.locations)
     @search.user_id = current_user.id if logged_in?
-    @search.save
-    redirect_to search_path(@search)
+
+    if @search.save
+      redirect_to search_path(@search)
+    else
+      redirect_to new_search_path(@search)
+    end
   end
 
   def show
@@ -31,7 +27,7 @@ class SearchesController < ApplicationController
   end
 
   def index
-    # TODO could make this the action/route for both "all" and friends' searches and have a nav link or dropdown to choose between the two options (would need code change here to determine how @searches is set as well)
+    # TODO could make this the action/route for both "all" and friends' searches -- and also probably the user's own searches? -- and have a nav link or dropdown to choose between the two options (would need code change here to determine how @searches is set as well)
     @searches = Search.all
   end
 
