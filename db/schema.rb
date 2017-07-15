@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170713211003) do
+ActiveRecord::Schema.define(version: 20170715165118) do
+
+  create_table "follows", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "following_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "locations", force: :cascade do |t|
     t.float "latitude"

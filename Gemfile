@@ -43,7 +43,6 @@ gem 'annotate'
 gem 'figaro'
 gem 'gmaps4rails'
 gem 'underscore-rails'
-gem 'gon'
 gem 'materialize-sass'
 
 group :development, :test do

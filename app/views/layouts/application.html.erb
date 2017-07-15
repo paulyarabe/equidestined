@@ -35,14 +35,14 @@
               <li><a class="dropdown-button" href="#!" data-activates="user_dropdown"><i class="material-icons left">person</i><%= current_user.name %> <i class="material-icons right">arrow_drop_down</i></a></li>
               <!-- Dropdown Structure -->
                <ul id="user_dropdown" class="dropdown-content">
-                 <li><a href="#!">My Profile</a></li>
-                 <li><a href="#!">My Friends</a></li>
+                 <li><%= link_to "My Profile", user_path(current_user) %></li>
+                 <li><%= link_to "My Friends", following_user_path(current_user) %></li>
                  <li><a href="#!">Saved Locations</a></li>
                   <li><%= link_to "Logout", logout_path, method: :"delete", data: {confirm: "Are you sure?"}%></li>
                </ul>
              <% else %>
                  <li><%= link_to "Log In", login_path %></li>
-                 <li><%= link_to "Sign Up", new_users_path %></li>
+                 <li><%= link_to "Sign Up", new_user_path %></li>
              <% end %>
           </ul>
               <!-- MOBILE NAV -->
@@ -59,7 +59,7 @@
                  </ul>
                <% else %>
                    <li><%= link_to "Log In", login_path %></li>
-                   <li><%= link_to "Sign Up", new_users_path %></li>
+                   <li><%= link_to "Sign Up", new_user_path %></li>
                <% end %>
     			  </ul>
     			  <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="zmdi zmdi-menu"></i></a>
