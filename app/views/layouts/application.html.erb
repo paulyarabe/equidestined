@@ -26,6 +26,9 @@
     <div class="nav-wrapper">
 		 <nav class="main-nav" role="navigation">
   			<div class="nav-wrapper container">
+          <ul class="left">
+            <%=link_to 'Equidestined', start_path%>
+          </ul>
           <ul class="right hide-on-med-and-down">
             <li><a href="#!">About</a></li>
             <% if logged_in? %>
@@ -35,7 +38,7 @@
                  <li><a href="#!">My Profile</a></li>
                  <li><a href="#!">My Friends</a></li>
                  <li><a href="#!">Saved Locations</a></li>
-                  <li><%= link_to "logout", logout_path, method: :"delete", data: {confirm: "Are you sure?"}%></li>
+                  <li><%= link_to "Logout", logout_path, method: :"delete", data: {confirm: "Are you sure?"}%></li>
                </ul>
              <% else %>
                  <li><%= link_to "Log In", login_path %></li>

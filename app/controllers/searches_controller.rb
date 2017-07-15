@@ -15,9 +15,13 @@ class SearchesController < ApplicationController
     # TODO add validation so the same search isn't saved to the
     # db more than once for the same user? then put create in an if statement
     @search = Search.new
-    params[:search][:location].each do |location|
-      if !(location[:address] == "")
-        @search.locations << Location.find_or_create_by(address: location[:address])
+    if @search.locations.length == 1
+      return new_search_path
+    else
+      params[:search][:location].each do |location|
+        if !(location[:address] == "")
+          @search.locations << Location.find_or_create_by(address: location[:address])
+        end
       end
     end
     @search.midpoint = Midpoint.calculate(@search.locations)

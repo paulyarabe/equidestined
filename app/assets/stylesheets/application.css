@@ -10,6 +10,11 @@ nav {
   background:transparent;
 }
 
+.left {
+  float: left;
+  font-size:1.3em;
+}
+
 label {
   font-size:1.1em;
 }
