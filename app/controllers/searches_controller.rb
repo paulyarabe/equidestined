@@ -26,6 +26,7 @@ class SearchesController < ApplicationController
   end
 
   def index
+    # TODO could make this the action/route for both "all" and friends' searches and have a nav link or dropdown to choose between the two options (would need code change here to determine how @searches is set as well)
     @searches = Search.all
   end
 
