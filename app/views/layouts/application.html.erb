@@ -36,6 +36,7 @@
               <!-- Dropdown Structure -->
                <ul id="user_dropdown" class="dropdown-content">
                  <li><%= link_to "My Profile", user_path(current_user) %></li>
+                 <li><%= link_to "My Searches", searches_user_path(current_user) %></li>
                  <li><%= link_to "My Friends", following_user_path(current_user) %></li>
                  <li><a href="#!">Saved Locations</a></li>
                   <li><%= link_to "Logout", logout_path, method: :"delete", data: {confirm: "Are you sure?"}%></li>

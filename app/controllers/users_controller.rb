@@ -32,6 +32,13 @@ class UsersController < ApplicationController
     render 'index.html.erb'
   end
 
+  def searches
+    @user = User.find(params[:id])
+    @title = @user == current_user ? "My Searches" : "#{@user.name}'s Searches"
+    @searches = @user.searches
+    render '/searches/index.html.erb'
+  end
+
   private
 
   def user_params
