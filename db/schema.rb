@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 20170716181337) do
     t.string "name"
     t.string "address"
     t.string "category"
-    t.float "rating"
+    t.integer "rating"
     t.float "latitude"
     t.float "longitude"
     t.string "url"

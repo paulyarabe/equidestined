@@ -4,15 +4,6 @@ body {
   background-size:2000px 1000px;
 }
 
-.about-container {
-  width:990px;
-  left:0;
-  right:0;
-  margin:auto;
-  margin-top:4%;
-  padding:20px 40px;
-  background:rgba(255,255,255, .9);
-}
 footer {
   margin-top:80px;
   background:transparent!important;
@@ -84,6 +75,20 @@ h6 {
   margin-bottom:0;
 }
 
+.about-container {
+  width:990px;
+  left:0;
+  right:0;
+  margin:auto;
+  margin-top:4%;
+  padding:20px 40px;
+  background:rgba(255,255,255, .9);
+}
+
+.about-container img {
+  max-width:100%;
+}
+
 .input-field .prefix {
   font-size:1.7rem;
 }
@@ -122,6 +127,27 @@ h6 {
   overflow-y:auto;
 }
 
+.user-container {
+  position:relative;
+  padding-top:5px;
+  padding-bottom:14px;
+}
+
+.follow-btn {
+  position:absolute;
+  right:0;
+}
+
+.follow {
+  background:transparent;
+  border: 1px solid #26a69a;
+  color: #26a69a;
+}
+
+.follow:hover {
+  color:#fff;
+}
+
 .main p {
   font-size:1.1em!important;
 }
@@ -135,7 +161,15 @@ h6 {
 }
 
 @media (max-width:768px) {
+  .container {
+    width:95%;
+  }
+
   .main-container {
+    width:100%;
+  }
+
+  .about-container {
     width:100%;
   }
 
