@@ -33,6 +33,7 @@ class SearchesController < ApplicationController
 
   def sample
     @searches = Search.all
+  end
 
   def friends
     # TODO make this not crash if a user has no friends
