@@ -13,10 +13,16 @@ body {
   padding:20px 40px;
   background:rgba(255,255,255, .9);
 }
+footer {
+  margin-top:80px;
+  background:transparent!important;
+  border-top:3px solid #fff;
+}
 
 nav {
   box-shadow:none;
   background:transparent;
+
 }
 
 .left {
