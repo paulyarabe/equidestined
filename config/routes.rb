@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new', as: 'login'
   post '/sessions', to: 'sessions#create', as: 'sessions'
   delete '/sessions', to: 'sessions#destroy', as: 'logout'
+  get 'about', to: 'static#about'
   #get "/results", to: "searches#show", as: 'results'
 
 end
