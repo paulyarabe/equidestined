@@ -4,10 +4,16 @@ body {
   background-size:2000px 1000px;
 }
 
+footer {
+  margin-top:80px;
+  background:transparent!important;
+  border-top:3px solid #fff;
+}
 
 nav {
   box-shadow:none;
   background:transparent;
+
 }
 
 .left {
