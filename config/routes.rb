@@ -9,10 +9,13 @@ Rails.application.routes.draw do
     end
   end
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get "/start", to: "searches#new", as: 'start'
   get '/login', to: 'sessions#new', as: 'login'
   post '/sessions', to: 'sessions#create', as: 'sessions'
   delete '/sessions', to: 'sessions#destroy', as: 'logout'
+  get 'about', to: 'static#about'
+  #get "/results", to: "searches#show", as: 'results'
+  get 'sample', to: 'searches#sample', as: 'sample'
+
 
 end

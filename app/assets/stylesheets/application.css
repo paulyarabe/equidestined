@@ -4,10 +4,25 @@ body {
   background-size:2000px 1000px;
 }
 
+.about-container {
+  width:990px;
+  left:0;
+  right:0;
+  margin:auto;
+  margin-top:4%;
+  padding:20px 40px;
+  background:rgba(255,255,255, .9);
+}
+footer {
+  margin-top:80px;
+  background:transparent!important;
+  border-top:3px solid #fff;
+}
 
 nav {
   box-shadow:none;
   background:transparent;
+
 }
 
 .left {

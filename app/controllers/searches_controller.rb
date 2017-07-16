@@ -31,6 +31,10 @@ class SearchesController < ApplicationController
     @searches = Search.all
   end
 
+  def sample
+    @searches = Search.all
+  end
+
   def friends
     # TODO make this not crash if a user has no friends
     @title = "See what your friends are searching for!"
