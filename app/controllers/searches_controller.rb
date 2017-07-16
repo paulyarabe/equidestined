@@ -11,6 +11,7 @@ class SearchesController < ApplicationController
     # TODO potentially add in ability to display error in @search.errors[:locations][1]
     params[:search][:location].each {|location| @search.locations << Location.find_or_create_by(address: location[:address]) unless location[:address].empty?}
     @search.midpoint = Midpoint.calculate(@search.locations)
+    @search.venues = Venue.find_near(@search)
     @search.user_id = current_user.id if logged_in?
 
     if @search.save
@@ -22,7 +23,6 @@ class SearchesController < ApplicationController
 
   def show
     @search = Search.find(params[:id])
-    @venues = Venue.find_near(@search.midpoint)
     render 'results.html.erb'
   end
 

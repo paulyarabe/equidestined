@@ -77,39 +77,37 @@ class Venue < ApplicationRecord
     #
     # NOTE Please see comments for .build_api_query_params for details about options hash, including the default values for search term, radius, and number of results.
     #
-    params = self.build_api_query_params(search, options={})
+    params = self.build_api_query_params(search, options)
     api_data = YelpAPI::Queries.get_businesses_from_api(params)
     save_all_to_db(api_data, params[:term]).compact unless api_data.nil?
   end
 
+  def self.get_widest_radius(search)
+    # Returns widest search radius, based on the following criteria:
+    # - If the distance between the first search location and the midpoint is 1 mile or less, maximum search radius is 806 meters (~1 mile)
+    # - Else, maximum search radius is 5 % of the distance between the first search location and the midpoint (in meters)
+    distance_to_midpoint = Geocoder::Calculations.distance_between(search.locations[0], search.midpoint)
+    distance_to_midpoint <= 2 ? 3220 : distance_to_midpoint * 0.05 * 1609
+  end
+
   def self.find_near(search, options={})
-    # Takes a midpoint object and an optional hash with the values noted below.
-    # Returns an array of geocoded Venue instances, saving any to the db that aren't already in it.
-    # Radius starts out at 805 m (~.05 mi) and widens if we don't get back any venues, up to ~2 miles
+    # Takes a search object and an options hash and calls .pull_from_api as many
+    # times as needed to return an array of at least 5 geocoded venue objects.
+    # Search radius starts out at 402 meters (~0.25 miles) and widens as needed.
     #
-    # :term - search term, must be a single value
-    # :limit - number of results to return, max of 50
+    # Please see comments above on .build_api_query_params, .pull_from_api, and .get_widest_radius for more details.
     #
-    # TODO fix radius algorithm
-    # NOTE  Geocoder::Calculations.distance_between(search.locations[0], search.midpoint)
-    # TODO get more than 5 venues and narrow it down some? grab 5 parks, 2 bars, 5 restaurants, and 2 coffee places and then mix it up and return 5? Maybe remove anything with a rating lower than 2 or not enough ratings? Idk
-    # TODO maybe give user option to specify open now and check against is_closed?
-    params = {
-      latitude: midpoint.latitude,
-      longitude: midpoint.longitude,
-      term: options[:term] || "restaurants",
-      limit: options[:limit] || 5,
-      sort_by: "rating",
-      radius: 805
-    }
+    options[:radius] = 402
+    venues = pull_from_api(search, options)
+    return venues unless venues.count < 5
 
-    while params[:radius] < 3220 do
-      venues = pull_from_api(midpoint, params)
-      return venues unless venues.count < 5
-      params[:radius] += 805
+    widest_radius = self.get_widest_radius(search)
+    while options[:radius] < widest_radius do
+      options[:radius] += 402
+      venues += pull_from_api(search, options)
+      return venues[0..4] unless venues.count < 5
     end
-
-    venues
+    venues[0..4]
   end
 
 end

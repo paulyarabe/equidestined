@@ -46,5 +46,7 @@ module YelpAPI
     #   get_businesses_from_api(options)
     #   offset += 50
     # end
+    
+  end
 
 end
