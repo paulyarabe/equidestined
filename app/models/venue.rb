@@ -2,16 +2,17 @@
 #
 # Table name: venues
 #
-#  id         :integer          not null, primary key
-#  name       :string
-#  address    :string
-#  category   :string
-#  rating     :integer
-#  latitude   :float
-#  longitude  :float
-#  url        :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id            :integer          not null, primary key
+#  name          :string
+#  address       :string
+#  category      :string
+#  rating        :integer
+#  latitude      :float
+#  longitude     :float
+#  url           :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  subcategories :string
 #
 
 class Venue < ApplicationRecord
@@ -23,69 +24,65 @@ class Venue < ApplicationRecord
   validates :longitude, presence: true
   after_validation :reverse_geocode  # auto-fetch address
 
-  API_HOST = "https://api.yelp.com"
-  SEARCH_PATH = "/v3/businesses/search"
-  TOKEN_PATH = "/oauth2/token"
-  GRANT_TYPE = "client_credentials"
-  CLIENT_ID = ENV["YELP_APP_ID"]
-  CLIENT_SECRET = ENV["YELP_APP_SECRET"]
-
-  def self.get_auth_token
-    params = {client_id: CLIENT_ID, client_secret: CLIENT_SECRET, grant_type: GRANT_TYPE}
-    token = HTTP.post("#{API_HOST}#{TOKEN_PATH}", params: params).parse
-    "#{token['token_type']} #{token['access_token']}"
-  end
-
-  def update_db_fields(params)
-    self.update(address: params[:address]) if self.latitude.nil? || self.longitude.nil?
-    self.update(category: params[:category]) if self.category.nil?
-    self.update(rating: params[:rating], url: params[:url])
-    self
-  end
-
-  def self.add_or_update_db_row(params)
-    init_params = {latitude: params[:latitude], longitude: params[:longitude], name: params[:name]}
-    Venue.find_or_create_by(init_params).update_db_fields(params)
-  end
-
-  def self.save_all_to_db(api_data, term)
-    api_data["businesses"].map do |business|
-      params = {
-        latitude: business["coordinates"]["latitude"],
-        longitude: business["coordinates"]["longitude"],
-        name: business["name"],
-        address: business["location"]["display_address"].join(", "),
-        category: term,
-        url: business["url"],
-        rating: business["rating"]
-      }
-      add_or_update_db_row(params)
-    end
-  end
-
-  def self.pull_from_api(midpoint, options={})
-    # Takes a midpoint object and an optional hash with the values noted below.
-    # Returns an array of geocoded Venue instances, saving any to the db that aren't already in it.
-    # It's possible to get back no venues depending on the search radius provided.
+  def self.build_api_query_params(search, options={})
+    # Takes a search object and an optional hash with the values noted below.
+    # Returns a params hash that can be passed to YelpAPI::Queries.get_businesses_from_api to pull JSON file with businesses, sorted by rating.
     #
     # :term - search term, must be a single value
-    # :limit - number of results to return, max of 50
+    # :limit - number of results to return, max of 50 (default is 5)
     # :radius - search radius in meters, max is 40k meters (25 mi)
     # (default radius is 805 meters, or ~0.5 mile and default limit is 5 results)
     #
     params = {
-      latitude: midpoint.latitude,
-      longitude: midpoint.longitude,
+      latitude: search.midpoint.latitude,
+      longitude: search.midpoint.longitude,
       term: options[:term] || "restaurants",
       limit: options[:limit] || 5,
       sort_by: "rating",
       radius: options[:radius] || 805
     }
-    api_data = HTTP.auth(get_auth_token).get("#{API_HOST}#{SEARCH_PATH}", params: params).parse
-    save_all_to_db(api_data, params[:term]) unless api_data.nil?
   end
 
-  def self.find_near(midpoint, options={})
+  def self.build_instance_params(business, search_term)
+    address = business["location"]["display_address"].join(", ")
+    latitude = business["coordinates"]["latitude"] || Geocoder.coordinates(address)[0]
+    longitude = business["coordinates"]["longitude"] || Geocoder.coordinates(address)[1]
+
+    params = {
+      latitude: latitude,
+      longitude: longitude,
+      name: business["name"],
+      address: address,
+      category: search_term,
+      url: business["url"],
+      rating: business["rating"],
+      subcategories: business["categories"].map {|category| category["title"]}.join(", ")
+    }
+  end
+
+  def self.save_all_to_db(api_data, search_term)
+    api_data["businesses"].map do |business|
+      params = self.build_instance_params(business, search_term)
+      venue = Venue.find_or_create_by(name: params[:name], latitude: params[:latitude], longitude: params[:longitude])
+      venue.update(params) ? venue : nil
+    end
+  end
+
+  def self.pull_from_api(search, options={})
+    # Takes a search object and an options hash. Options hash is not required.
+    #
+    # Returns an array of geocoded Venue instances "near" the search object's midpoint, sorted by rating, and saves any to the db that aren't already in it.
+    # Updates db values for any venues already stored in the db.
+    # Distance from midpoint and number of venues depend on params passed in through the options hash.
+    #
+    # NOTE Please see comments for .build_api_query_params for details about options hash, including the default values for search term, radius, and number of results.
+    #
+    params = self.build_api_query_params(search, options={})
+    api_data = YelpAPI::Queries.get_businesses_from_api(params)
+    save_all_to_db(api_data, params[:term]).compact unless api_data.nil?
+  end
+
+  def self.find_near(search, options={})
     # Takes a midpoint object and an optional hash with the values noted below.
     # Returns an array of geocoded Venue instances, saving any to the db that aren't already in it.
     # Radius starts out at 805 m (~.05 mi) and widens if we don't get back any venues, up to ~2 miles
@@ -93,6 +90,10 @@ class Venue < ApplicationRecord
     # :term - search term, must be a single value
     # :limit - number of results to return, max of 50
     #
+    # TODO fix radius algorithm
+    # NOTE  Geocoder::Calculations.distance_between(search.locations[0], search.midpoint)
+    # TODO get more than 5 venues and narrow it down some? grab 5 parks, 2 bars, 5 restaurants, and 2 coffee places and then mix it up and return 5? Maybe remove anything with a rating lower than 2 or not enough ratings? Idk
+    # TODO maybe give user option to specify open now and check against is_closed?
     params = {
       latitude: midpoint.latitude,
       longitude: midpoint.longitude,

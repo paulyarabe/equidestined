@@ -4,7 +4,7 @@ class CreateVenues < ActiveRecord::Migration[5.1]
       t.string :name
       t.string :address
       t.string :category
-      t.integer :rating
+      t.float :rating
       t.float :latitude
       t.float :longitude
       t.string :url

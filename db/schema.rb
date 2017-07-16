@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170715194207) do
+ActiveRecord::Schema.define(version: 20170716181337) do
 
   create_table "follows", force: :cascade do |t|
     t.integer "user_id"
@@ -76,12 +76,13 @@ ActiveRecord::Schema.define(version: 20170715194207) do
     t.string "name"
     t.string "address"
     t.string "category"
-    t.integer "rating"
+    t.float "rating"
     t.float "latitude"
     t.float "longitude"
     t.string "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "subcategories"
   end
 
 end

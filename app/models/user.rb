@@ -21,6 +21,8 @@ class User < ApplicationRecord
   has_many :following_relationships, foreign_key: :user_id, class_name: 'Follow'
   has_many :following, through: :following_relationships, source: :following
 
+  validates :email, uniqueness: true
+
   def follow(other_user)
     self.following << other_user
   end
@@ -33,5 +35,5 @@ class User < ApplicationRecord
     # returns true if current_user is following other_user
     self.following.include?(other_user)
   end
-  
+
 end
