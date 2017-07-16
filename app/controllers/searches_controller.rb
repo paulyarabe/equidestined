@@ -27,12 +27,18 @@ class SearchesController < ApplicationController
   end
 
   def index
-    # TODO could make this the action/route for both "all" and friends' searches -- and also probably the user's own searches? -- and have a nav link or dropdown to choose between the two options (would need code change here to determine how @searches is set as well)
+    @title = "See what others are searching for!"
     @searches = Search.all
   end
 
   def sample
     @searches = Search.all
+
+  def friends
+    # TODO make this not crash if a user has no friends
+    @title = "See what your friends are searching for!"
+    @searches = Search.where({ user_id: current_user.following.select(:id) }).order(created_at: :desc)
+    render 'index.html.erb'
   end
 
   private

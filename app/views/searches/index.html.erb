@@ -4,15 +4,20 @@
     <div class="static">
         <h3 class="txt-primary">Equidestined</h3>
       </div>
-        <h6>See what others are searching for!</h6>
+        <h6><%= @title %></h6>
+        <ul>
         <% @searches.each do |search| %>
-          <ul><strong>Locations searched:</strong>
-            <% search.locations.each do |location| %>
+          <li><% user = User.find(search.user_id) %>
+          <p><strong><span class="txt-primary"><%= user.name %></span> - <%= search.created_at.strftime("%A, %B %-d, %Y %I:%M:%S %P") %></strong></p>
+            <ul>Locations searched:
+              <% search.locations.each do |location| %>
               <li><%= location.address %> </li>
-            <% end %>
-          </ul>
-          <strong>Midpoint:</strong>
-          <%= search.midpoint.address %>
-        <% end %>
+              <% end %>
+            </ul>
+            <strong>Midpoint:</strong>
+            <%= search.midpoint.address %>
+          </li>
+      <% end %>
+      </ul>
   </div>
 </div>

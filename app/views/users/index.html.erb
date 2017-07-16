@@ -1,0 +1,15 @@
+<div class= "container">
+
+  <div class="main-container index-attributes z-depth-5">
+    <div class="static">
+        <h3 class="txt-primary">Equidestined</h3>
+      </div>
+        <h6><%= @title %></h6>
+        <% @users.each do |user| %>
+          <ul>
+            <%= link_to user.name, user_path(user) %>
+          </ul>
+        <% end %>
+
+  </div>
+</div>
