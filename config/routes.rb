@@ -10,5 +10,6 @@ Rails.application.routes.draw do
   delete '/sessions', to: 'sessions#destroy', as: 'logout'
   get 'about', to: 'static#about'
   #get "/results", to: "searches#show", as: 'results'
+  get 'sample', to: 'searches#sample', as: 'sample'
 
 end

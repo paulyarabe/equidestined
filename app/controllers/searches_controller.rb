@@ -31,6 +31,10 @@ class SearchesController < ApplicationController
     @searches = Search.all
   end
 
+  def sample
+    @searches = Search.all
+  end
+
   private
 
   def search_params
