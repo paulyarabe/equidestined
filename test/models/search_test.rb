@@ -9,6 +9,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  midpoint_id :integer
+#  venue_type  :string
 #
 
 require 'test_helper'

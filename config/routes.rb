@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :searches, only: [:new, :create, :show, :index]
+  resources :follows, only: [:create, :edit, :update, :destroy]
   resources :users, only: [:new, :create, :show, :index] do
     member do
       get :following, :followers, :searches

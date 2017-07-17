@@ -8,12 +8,9 @@
         <% @users.each do |user| %>
           <div class="user-container">
               <%= link_to user.name, user_path(user) %>
-              <% if current_user.following?(user) %>
-                <a class="waves-effect waves-light btn follow-btn unfollow"><i class="material-icons right">remove</i>unfollow</a>
-              <% else %>
-                <a class="waves-effect waves-light btn follow-btn follow"><i class="material-icons right">add</i>follow</a>
-              <% end %>
-          </div>
+                <% @user = user %>
+                <%= render 'follow_form' if logged_in? %>
+            </div>
           <hr>
         <% end %>
   </div>

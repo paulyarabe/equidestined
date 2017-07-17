@@ -6,7 +6,7 @@
 #  name          :string
 #  address       :string
 #  category      :string
-#  rating        :integer
+#  rating        :float
 #  latitude      :float
 #  longitude     :float
 #  url           :string
