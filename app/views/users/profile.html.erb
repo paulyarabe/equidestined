@@ -1,9 +1,10 @@
 <div class="main-container map-width z-depth-5">
   <h3 class="txt-primary"><%= @user.name %></h3>
 
-  <% @user.venues.each do |venue| %>
-    <li><%= link_to venue.name, venue.url, target: :_blank %> - <%= venue.address %> </li>
+  <% if current_user == @user || @user.following?(current_user) %>
+    <% @user.venues.each do |venue| %>
+      <li><%= link_to venue.name, venue.url, target: :_blank %> - <%= venue.address %> </li>
+    <% end %>
   <% end %>
-
 
 </div>
