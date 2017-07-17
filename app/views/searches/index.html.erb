@@ -7,8 +7,8 @@
         <h6><%= @title %></h6>
         <ul>
         <% @searches.each do |search| %>
-          <li><% user = User.find(search.user_id) %>
-          <p><strong><span class="txt-primary"><%= user.name %></span> - <%= search.created_at.strftime("%A, %B %-d, %Y %I:%M:%S %P") %></strong></p>
+          <% user_name = User.find(search.user_id).name unless search.user_id.nil? %>
+          <li><p><strong><span class="txt-primary"><%= user_name || "Anonymous Search"%></span> - <%= search.created_at.strftime("%A, %B %-d, %Y %I:%M:%S %P") %></strong></p>
             <ul>Locations searched:
               <% search.locations.each do |location| %>
               <li><%= location.address %> </li>
