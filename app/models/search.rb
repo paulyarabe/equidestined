@@ -26,4 +26,8 @@ class Search < ApplicationRecord
     errors.add(:locations, "Please enter at least two addresses.") unless self.locations.select{|location| !location.address.nil? && !location.address.empty?}.count >= 2
   end
 
+  def display_datetime
+    self.created_at.strftime("%A, %B %-d, %Y %I:%M:%S %P")
+  end
+
 end

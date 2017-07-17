@@ -42,7 +42,7 @@ class UsersController < ApplicationController
   def searches
     @user = User.find(params[:id])
     @title = @user == current_user ? "My Searches" : "#{@user.name}'s Searches"
-    @searches = @user.searches
+    @searches = @user.searches.order(created_at: :desc)
     render '/searches/index.html.erb'
   end
 

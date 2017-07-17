@@ -27,16 +27,19 @@ class SearchesController < ApplicationController
   end
 
   def index
+    redirect_to sample_path unless current_user.is_admin
     @title = "See what others are searching for!"
-    @searches = Search.all
+    @searches = Search.all.order(created_at: :desc)
   end
 
   def sample
-    @searches = Search.all
+    @title = "Here's a small sample of what others are searching for!"
+    @searches = Search.all.sample(5)
+    @sample = true
+    render 'index.html.erb'
   end
 
   def friends
-    # TODO make this not crash if a user has no friends
     @title = "See what your friends are searching for!"
     @searches = Search.where({ user_id: current_user.following.select(:id) }).order(created_at: :desc)
     render 'index.html.erb'
