@@ -32,7 +32,6 @@
           <ul class="right hide-on-med-and-down">
 
             <li><%=link_to 'Users', users_path%></li>
-            <li><%=link_to 'About', about_path%></li>
 
             <% if logged_in? %>
               <li><a class="dropdown-button" href="#!" data-activates="user_dropdown"><i class="material-icons left">person</i><%= current_user.name %> <i class="material-icons right">arrow_drop_down</i></a></li>
@@ -42,8 +41,7 @@
                  <li><%= link_to "My Searches", searches_user_path(current_user) %></li>
                  <li><%= link_to "My Friends", following_user_path(current_user) %></li>
                  <li><%= link_to "My Friends' Searches", searches_users_path %></li>
-                 <li><a href="#!">Saved Locations</a></li>
-                  <li><%= link_to "Logout", logout_path, method: :"delete", data: {confirm: "Are you sure?"}%></li>
+                 <li><%= link_to "Logout", logout_path, method: :"delete", data: {confirm: "Are you sure?"}%></li>
                </ul>
              <% else %>
                  <li><%= link_to "Log In", login_path %></li>
@@ -86,7 +84,7 @@
             <div class="col l6 s12">
               <h5 class="white-text">Equidestined</h5>
               <ul>
-                <li><a class="grey-text text-lighten-3" href="#!">About us</a></li>
+                <li><%= link_to "About us", about_path, class: "grey-text text-lighten-3" %></li>
               </ul>
             </div>
             <div class="col l4 offset-l2 s12">
