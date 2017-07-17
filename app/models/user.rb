@@ -15,6 +15,9 @@ class User < ApplicationRecord
   has_secure_password
   has_many :searches
 
+  has_many :saved_venues
+  has_many :venues, through: :saved_venues
+
   has_many :follows
   has_many :follower_relationships, foreign_key: :following_id, class_name: 'Follow'
   has_many :followers, through: :follower_relationships, source: :follower
@@ -34,6 +37,10 @@ class User < ApplicationRecord
   def following?(other_user)
     # returns true if current_user is following other_user
     self.following.include?(other_user)
+  end
+
+  def save_venue(venue)
+    self.venues << venue
   end
 
 end

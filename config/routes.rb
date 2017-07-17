@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create, :show, :index] do
     member do
       get :following, :followers, :searches
+      get :store_venue, to: "users#store_venue"
     end
     collection do
       get :searches, to: "searches#friends"
@@ -17,6 +18,5 @@ Rails.application.routes.draw do
   get 'about', to: 'static#about'
   #get "/results", to: "searches#show", as: 'results'
   get 'sample', to: 'searches#sample', as: 'sample'
-
 
 end

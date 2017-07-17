@@ -19,6 +19,9 @@ class Venue < ApplicationRecord
   has_many :search_venues
   has_many :searches, through: :search_venues
 
+  has_many :saved_venues
+  has_many :users, through: :saved_venues
+
   reverse_geocoded_by :latitude, :longitude
   validates :latitude, presence: true
   validates :longitude, presence: true

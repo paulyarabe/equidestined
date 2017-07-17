@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170717005352) do
+ActiveRecord::Schema.define(version: 20170717030537) do
 
   create_table "follows", force: :cascade do |t|
     t.integer "user_id"
@@ -38,6 +38,11 @@ ActiveRecord::Schema.define(version: 20170717005352) do
     t.integer "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "saved_venues", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "venue_id"
   end
 
   create_table "search_locations", force: :cascade do |t|

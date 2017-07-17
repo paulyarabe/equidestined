@@ -19,6 +19,13 @@ class UsersController < ApplicationController
     render 'profile.html.erb'
   end
 
+  def store_venue
+    @user = User.find_by_id(current_user)
+    venue = Venue.find(params[:venue_id])
+    @user.save_venue(venue)
+    render 'profile.html.erb'
+  end
+
   def index
     @title = "All Users"
     @users = User.all
