@@ -3,14 +3,14 @@
   <div class="main-container index-attributes z-depth-5">
     <div class="static">
         <h3 class="txt-primary">Equidestined</h3>
-      </div>
+    </div>
         <h6><%= @title %></h6>
         <% @users.each do |user| %>
           <div class="user-container">
               <%= link_to user.name, user_path(user) %>
-                <% @user = user %>
-                <%= render 'follow_form' if logged_in? %>
-            </div>
+              <% @user = user %>
+              <%= render 'follow_form' if logged_in? %>
+          </div>
           <hr>
         <% end %>
   </div>

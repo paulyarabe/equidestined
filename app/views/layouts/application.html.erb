@@ -31,6 +31,7 @@
           </ul>
           <ul class="right hide-on-med-and-down">
 
+            <li><%=link_to 'Users', users_path%></li>
             <li><%=link_to 'About', about_path%></li>
 
             <% if logged_in? %>
@@ -40,6 +41,7 @@
                  <li><%= link_to "My Profile", user_path(current_user) %></li>
                  <li><%= link_to "My Searches", searches_user_path(current_user) %></li>
                  <li><%= link_to "My Friends", following_user_path(current_user) %></li>
+                 <li><%= link_to "My Friends' Searches", searches_users_path %></li>
                  <li><a href="#!">Saved Locations</a></li>
                   <li><%= link_to "Logout", logout_path, method: :"delete", data: {confirm: "Are you sure?"}%></li>
                </ul>
