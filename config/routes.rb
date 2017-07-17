@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create, :show, :index] do
     member do
       get :following, :followers, :searches
-      post :store_venue
+      get :store_venue, to: "users#store_venue"
     end
     collection do
       get :searches, to: "searches#friends"

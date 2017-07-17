@@ -23,6 +23,7 @@ class UsersController < ApplicationController
     @user = User.find_by_id(current_user)
     venue = Venue.find(params[:venue_id])
     @user.save_venue(venue)
+    render 'profile.html.erb'
   end
 
   def index
