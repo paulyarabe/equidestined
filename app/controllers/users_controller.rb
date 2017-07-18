@@ -28,7 +28,7 @@ class UsersController < ApplicationController
 
   def index
     @matches = User.search(params[:search])
-    #render 'index.html.erb'
+    render 'index.html.erb'
   end
 
   def following
