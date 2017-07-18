@@ -27,16 +27,15 @@ class UsersController < ApplicationController
   end
 
   def index
-    @title = "All Users"
-    @users = User.all
-    render 'index.html.erb'
+    @matches = User.search(params[:search])
+    #render 'index.html.erb'
   end
 
   def following
     @title = "My Friends"
     @user  = User.find(params[:id])
     @users = @user.following
-    render 'index.html.erb'
+    render 'following.html.erb'
   end
 
   def searches

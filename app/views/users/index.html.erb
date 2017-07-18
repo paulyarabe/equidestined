@@ -4,14 +4,15 @@
     <div class="static">
         <h3 class="txt-primary">Equidestined</h3>
     </div>
-        <h6><%= @title %></h6>
-        <% @users.each do |user| %>
-          <div class="user-container">
-              <%= link_to user.name, user_path(user) %>
-              <% @user = user %>
-              <%= render 'follow_form' if logged_in? %>
-          </div>
-          <hr>
-        <% end %>
+
+      <%= form_tag(users_path, method: :get) do %>
+        <%= text_field_tag :search, params[:search], placeholder: "Enter your friends first and last name", value: nil %>
+        <%= submit_tag "Search", :name => nil %>
+      <% end %>
+
+          <% @matches.each do |match| %>
+            <%= link_to match.name, user_path(match) %>
+          <% end %>
+
   </div>
 </div>

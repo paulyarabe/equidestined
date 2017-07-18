@@ -26,6 +26,10 @@ class User < ApplicationRecord
 
   validates :email, uniqueness: true
 
+  def self.search(search)
+      where('name LIKE ?', "%#{search}%")
+  end
+
   def follow(other_user)
     self.following << other_user
   end
