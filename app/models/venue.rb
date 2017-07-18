@@ -85,11 +85,17 @@ class Venue < ApplicationRecord
     save_all_to_db(api_data, params[:term]).compact unless api_data.nil?
   end
 
+  def self.get_average_distance_from_midpoint(search)
+    distances = search.locations.map{|location| Geocoder::Calculations.distance_between(location, search.midpoint)}
+    avg_distance = distances.inject(&:+)/distances.count
+  end
+
   def self.get_widest_radius(search)
     # Returns widest search radius, based on the following criteria:
-    # - If the distance between the first search location and the midpoint is 1 mile or less, maximum search radius is 806 meters (~1 mile)
-    # - Else, maximum search radius is 5 % of the distance between the first search location and the midpoint (in meters)
-    distance_to_midpoint = Geocoder::Calculations.distance_between(search.locations[0], search.midpoint)
+    # - If the average distance between all search locations and the midpoint is 1 mile or less, maximum search radius is 806 meters (~1 mile)
+    # - Else, maximum search radius is 5 % of the average distances between all search locations and the midpoint (in meters)
+    #distance_to_midpoint = Geocoder::Calculations.distance_between(search.locations[0], search.midpoint)
+    distance_to_midpoint = self.get_average_distance_from_midpoint(search)
     distance_to_midpoint <= 2 ? 3220 : distance_to_midpoint * 0.05 * 1609
   end
 
@@ -107,7 +113,8 @@ class Venue < ApplicationRecord
     widest_radius = self.get_widest_radius(search)
     while options[:radius] < widest_radius do
       options[:radius] += 402
-      venues += pull_from_api(search, options)
+      venues += pull_from_api(search, options).reject{|venue| venues.include?(venue)}
+      #venues += pull_from_api(search, options)
       return venues[0..4] unless venues.count < 5
     end
     venues[0..4]

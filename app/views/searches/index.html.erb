@@ -5,6 +5,7 @@
         <h3 class="txt-primary">Equidestined</h3>
       </div>
         <h6><%= @title %></h6>
+        <br />
         <ul>
         <% @searches.each do |search| %>
           <% user_name = User.find(search.user_id).name unless search.user_id.nil? || @sample %>

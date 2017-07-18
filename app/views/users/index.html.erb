@@ -5,6 +5,8 @@
         <h3 class="txt-primary">Equidestined</h3>
     </div>
         <h6><%= @title %></h6>
+        <br />
+        <br />
         <% @users.each do |user| %>
           <div class="user-container">
               <%= link_to user.name, user_path(user) %>

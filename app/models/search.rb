@@ -27,7 +27,7 @@ class Search < ApplicationRecord
   end
 
   def display_datetime
-    self.created_at.strftime("%A, %B %-d, %Y %I:%M:%S %P")
+    self.created_at.strftime("%A, %B %-d, %Y %I:%M:%S %P %Z")
   end
 
 end

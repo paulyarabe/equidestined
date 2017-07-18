@@ -28,14 +28,14 @@ class UsersController < ApplicationController
 
   def index
     @title = "All Users"
-    @users = User.all
+    @users = User.all.order(name: :asc)
     render 'index.html.erb'
   end
 
   def following
     @title = "My Friends"
     @user  = User.find(params[:id])
-    @users = @user.following
+    @users = @user.following.order(name: :asc)
     render 'index.html.erb'
   end
 
