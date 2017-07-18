@@ -8,6 +8,10 @@ a.link {
   float: right;
 }
 
+.main-container {
+  min-height:600px;
+}
+
 footer {
   margin-top:200px;
   background:transparent!important;
@@ -201,6 +205,10 @@ h6 {
 
   footer {
     position:relative;
+  }
+
+  #map {
+    width:100%;
   }
 
 }
