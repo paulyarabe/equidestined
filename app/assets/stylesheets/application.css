@@ -1,18 +1,19 @@
 /* Style sheets are ordered by specificity(convention). HTML tags will be first, followed by classes(have a "." infront of them), then followed by ID's (have a "#" infront of them). */
 body {
   background:#1279be url('https://images.unsplash.com/photo-1495420047114-9f6ef7fc0cbc?dpr=1&amp;auto=format&amp;fit=crop&amp;w=1500&amp;h=1000&amp;q=80&amp;cs=tinysrgb&amp;crop=')no-repeat;
-  background-size:2000px 1000px;
+  background-size:cover;
 }
 
 a.link {
   float: right;
 }
 
-
 footer {
-  margin-top:80px;
+  margin-top:200px;
   background:transparent!important;
   border-top:3px solid #fff;
+  bottom:0;
+  width:100%;
 }
 
 nav {
@@ -21,10 +22,6 @@ nav {
 
 }
 
-.left {
-  float: left;
-  font-size:1.3em;
-}
 
 label {
   font-size:1.1em;
@@ -47,6 +44,15 @@ h6 {
 /* Any HTML tag that has this class will have x colored background */
 .bg-primary {
   background:#26a69a;
+}
+
+.left {
+  float: left;
+  font-size:1.3em;
+}
+
+.right-small {
+  float:left!important;
 }
 
 .bg-secondary {
@@ -81,7 +87,7 @@ h6 {
 }
 
 .about-container {
-  width:990px;
+  width:100%;
   left:0;
   right:0;
   margin:auto;
@@ -92,6 +98,7 @@ h6 {
 
 .about-container img {
   max-width:100%;
+  height:auto;
 }
 
 .input-field .prefix {
@@ -166,6 +173,19 @@ h6 {
   color:#26a69a;
 }
 
+@media (max-width:1386px) {
+  body {
+    background-size:2000px 1000px;
+  }
+
+}
+
+@media (max-width: 990px) {
+  .right-small {
+    float:right!important;
+  }
+}
+
 @media (max-width:768px) {
   .container {
     width:95%;
@@ -179,4 +199,15 @@ h6 {
     width:100%;
   }
 
+  footer {
+    position:relative;
+  }
+
+}
+
+@media (max-width:500px) {
+  .about-img-container {
+    width:100%!important;
+    text-align:center;
+  }
 }
