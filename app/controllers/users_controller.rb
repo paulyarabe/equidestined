@@ -34,7 +34,7 @@ class UsersController < ApplicationController
   def following
     @title = "My Friends"
     @user  = User.find(params[:id])
-    @users = @user.following
+    @users = @user.following.order(name: :asc)
     render 'following.html.erb'
   end
 
