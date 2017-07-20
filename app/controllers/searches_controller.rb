@@ -28,7 +28,7 @@ class SearchesController < ApplicationController
 
   def index
     redirect_to sample_path unless current_user.is_admin
-    @title = "See what others are searching for!"
+    @title = "Midpoints being uncovered by real users!"
     @searches = Search.all.order(created_at: :desc)
   end
 

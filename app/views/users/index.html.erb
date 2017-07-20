@@ -6,7 +6,7 @@
 
 
     <%= form_tag(users_path, method: :get) do %>
-      <%= text_field_tag :search, params[:search], placeholder: "Enter your friends first and last name", value: nil %>
+      <%= text_field_tag :search, params[:search], placeholder: "Enter your friend's first and last name", value: nil %>
       <%= submit_tag "Search", :name => nil, class: "waves-effect waves-light btn" %>
     <% end %>
 
@@ -19,6 +19,8 @@
             <% end %>
         </div>
       <% end %>
-      
+
+        
+
   </div>
 </div>
