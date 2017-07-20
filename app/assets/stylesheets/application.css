@@ -65,6 +65,17 @@ h6 {
 .txt-secondary {
   color:#a7ffeb;
 }
+.midpoint-bullet-point {
+  height:20px;
+  width:20px;
+  float:left;
+  margin-right:10px;
+}
+.venue-bullet-point {
+  height:20px;
+  width:20px;
+  margin-right:10px;
+}
 
 /* Dark text */
 .dk-txt {

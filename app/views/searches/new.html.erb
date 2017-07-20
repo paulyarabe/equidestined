@@ -20,12 +20,18 @@
 
 <script type="text/javascript">
 
+// Google autocomplete inputs
 var address = document.getElementsByClassName('address-input');
-
 for(var i=0; i< address.length; i++){
    new google.maps.places.Autocomplete(address[i]);
 }
 
+// Change the placeholder in the third input
+var thirdaddress = document.getElementById("2");
+thirdaddress.placeholder = "address here is optional"
+
+
+// Current address for user
 function getLocation() {
 
    if(!navigator.geolocation) ;
