@@ -1,15 +1,52 @@
-<div class="main-container z-depth-5">
+<div class="main-container z-depth-5 relative">
   <h3 class="txt-primary">Equidestined</h3>
   <p class="home-instructions">Enter two or three addresses to find the optimal meeting spot!</p>
+  <button onclick="getLocation()" id="user-location-btn"><i class="material-icons">my_location</i></button>
+  <% counter = 0%>
   <%= form_for @search do |search_form| %>
     <% @search.locations.each do |location| %>
-    <div class="input-field col s12">
       <%= search_form.fields_for location, index: location.id do |location_form|%>
-        <%= location_form.text_field :address %>
         <%= location_form.label :address%>
+        <%= location_form.text_field :address, class: "address-input", onkeydown: "if($('.pac-container').is(':visible') && event.keyCode == 13) {event.preventDefault();}", id: counter %>
+        <% counter += 1%>
       <% end %>
-    </div>
   <% end %>
   <br><%= submit_tag('Get Midpoint!', :class=>"waves-effect waves-light btn") %>
 <% end %>
+<p id="demo"></p>
 </div>
+<script src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places&dummy=.js"></script>
+
+<script type="text/javascript">
+
+var address = document.getElementsByClassName('address-input');
+
+for(var i=0; i< address.length; i++){
+   new google.maps.places.Autocomplete(address[i]);
+}
+
+function getLocation() {
+   if(!navigator.geolocation) ;
+
+   navigator.geolocation.getCurrentPosition(function(pos) {
+      var latlng = new google.maps.LatLng(pos.coords.latitude,pos.coords.longitude);
+      // This is making the Geocode request
+      var geocoder = new google.maps.Geocoder();
+      geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+          if (status !== google.maps.GeocoderStatus.OK) {
+              alert(status);
+          }
+          // This is checking to see if the Geoeode Status is OK before proceeding
+          if (status == google.maps.GeocoderStatus.OK) {
+              console.log(results);
+              var address = (results[0].formatted_address);
+              document.getElementById('0').value = address
+          }
+      });
+
+
+   });
+ };
+
+
+</script>

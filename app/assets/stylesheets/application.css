@@ -8,10 +8,6 @@ a.link {
   float: right;
 }
 
-.main-container {
-  min-height:400px;
-}
-
 footer {
   margin-top:200px;
   background:transparent!important;
@@ -23,9 +19,7 @@ footer {
 nav {
   box-shadow:none;
   background:transparent;
-
 }
-
 
 label {
   font-size:1.1em;
@@ -88,6 +82,10 @@ h6 {
 
 .mb-0 {
   margin-bottom:0;
+}
+
+.main-container {
+  min-height:400px;
 }
 
 .about-container {
@@ -161,12 +159,26 @@ h6 {
   color: #26a69a;
 }
 
+.relative {
+  position:relative;
+}
+
 .follow:hover {
   color:#fff;
 }
 
 .main p {
   font-size:1.1em!important;
+}
+
+
+
+#user-location-btn {
+  background:none;
+  border:1px solid black;
+  position:absolute;
+  right:40px;
+  padding-top:5px;
 }
 
 #map {
