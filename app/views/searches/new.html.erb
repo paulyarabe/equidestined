@@ -1,7 +1,8 @@
 <div class="main-container z-depth-5 relative">
   <h3 class="txt-primary">Equidestined</h3>
   <p class="home-instructions">Enter two or three addresses to find the optimal meeting spot!</p>
-  <button onclick="getLocation()" id="user-location-btn"><i class="material-icons">my_location</i></button>
+  <button onclick="getLocation();$('#0').addClass('loadinggif');", class="tooltipped waves-effect waves-light btn" data-position="top" data-delay="50" data-tooltip="Current Location" id="user-location-btn"><i class="material-icons ">my_location</i></button>
+
   <% counter = 0%>
   <%= form_for @search do |search_form| %>
     <% @search.locations.each do |location| %>
@@ -11,7 +12,7 @@
         <% counter += 1%>
       <% end %>
   <% end %>
-  <br><%= submit_tag('Get Midpoint!', :class=>"waves-effect waves-light btn") %>
+  <br><%= submit_tag('Get Midpoint!', :class=>"waves-effect waves-light btn", id: "submit-midpoint") %>
 <% end %>
 <p id="demo"></p>
 </div>
@@ -26,6 +27,7 @@ for(var i=0; i< address.length; i++){
 }
 
 function getLocation() {
+
    if(!navigator.geolocation) ;
 
    navigator.geolocation.getCurrentPosition(function(pos) {
@@ -41,12 +43,12 @@ function getLocation() {
               console.log(results);
               var address = (results[0].formatted_address);
               document.getElementById('0').value = address
+              if(document.getElementById('0').value = address) {
+                $('#0').removeClass('loadinggif')
+              }
           }
       });
-
-
    });
  };
-
 
 </script>

@@ -38,6 +38,7 @@ gem 'geocoder'
 gem 'json'
 gem 'http'
 
+
 gem 'httparty'
 gem 'annotate'
 gem 'figaro'

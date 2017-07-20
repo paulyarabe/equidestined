@@ -15,12 +15,24 @@
     <!-- GOOGLE FONTS -->
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <!-- CUSTOM STYLES -->
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => "reload" %>
 
   </head>
 
   <body>
+
+    <div id="ms-preload" class="ms-preload">
+       <div id="status">
+         <div class="spinner">
+             <div class="cssload-loader">
+             <div class="cssload-inner cssload-one"></div>
+             <div class="cssload-inner cssload-two"></div>
+             <div class="cssload-inner cssload-three"></div>
+           </div>
+         </div>
+       </div>
+     </div>
 
     <!-- HEADER  -->
     <div class="nav-wrapper">
@@ -108,7 +120,15 @@
     <script type="text/javascript">
       $( document ).ready(function(){
         $(".button-collapse").sideNav();
-      })
+        $('.tooltipped').tooltip({delay: 50});
+        $("#submit-midpoint").on("click", function() {
+          $("#ms-preload").fadeIn();
+        });
+      });
+
+      $(window).load(function(){
+        $("#ms-preload").fadeOut();
+      });
     </script>
   </body>
 </html>
