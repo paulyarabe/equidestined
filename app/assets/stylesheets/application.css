@@ -39,6 +39,10 @@ h6 {
   font-size:1.4em;
 }
 
+input[type=text]:not(.browser-default):focus:not([readonly])+label {
+  color:#9e9e9e;
+}
+
 /* Any HTML tag that has this class will have x colored background */
 .bg-primary {
   background:#26a69a;
@@ -93,6 +97,7 @@ h6 {
 
 .loadinggif {
     background:url('http://www.hsi.com.hk/HSI-Net/pages/images/en/share/ajax-loader.gif') no-repeat right center;
+    margin-right:100px;
 }
 
 .mb-0 {
@@ -187,7 +192,9 @@ h6 {
   font-size:1.1em!important;
 }
 
-
+.address-input:first {
+  background:#000!important;
+}
 
 #user-location-btn {
   position:absolute;

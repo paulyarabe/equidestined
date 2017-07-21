@@ -34,6 +34,14 @@
     },
     function() {
       markers = handler.addMarkers([
+
+        <%  @search.locations.each do |location| %>
+        {
+          "lat":<%= location.latitude %>,
+          "lng":<%= location.longitude %>,
+          "infowindow": "<%=location.address%> "
+        },
+        <% end %>
         {
           "lat":<%= @search.midpoint.latitude %>,
           "lng":<%= @search.midpoint.longitude %>,
@@ -57,8 +65,24 @@
             },
           <% end %>
       ]);
+      //polyline
+      polyline = [
+        <%  @search.locations.each do |location| %>
+              {"lat":<%= location.latitude %>,
+              "lng":<%= location.longitude %>},
+              {"lat":<%= @search.midpoint.latitude %>,
+              "lng":<%= @search.midpoint.longitude %>},
+        <% end %>
+      ];
+      handler.addPolyline(polyline);
+      handler.bounds.extend(polyline[0]);
+      handler.bounds.extend(polyline[ polyline.length - 1]);
       handler.bounds.extendWith(markers);
-      handler.map.centerOn({lat: <%= @search.midpoint.latitude %>,lng: <%= @search.midpoint.longitude %>})
+      handler.fitMapToBounds();
+      handler.map.centerOn({lat: <%= @search.midpoint.latitude %>,lng: <%= @search.midpoint.longitude %>});
+
+
+
     }
   );
 </script>
