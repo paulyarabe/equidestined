@@ -1,9 +1,9 @@
 <div class="main-container map-width z-depth-5">
   <h3 class="txt-primary">Here's the midpoint!</h3>
-    <img src="http://maps.google.com/mapfiles/ms/icons/red-dot.png" class="midpoint-bullet-point"><h6><%= @search.midpoint.address %></h6>
+    <img src="https://maps.google.com/mapfiles/ms/icons/red-dot.png" class="midpoint-bullet-point"><h6><%= @search.midpoint.address %></h6>
     <ul><strong>Nearby venues:</strong>
       <% @search.venues.each do |venue| %>
-        <li><img src="http://maps.google.com/mapfiles/ms/icons/blue-dot.png" class="venue-bullet-point"><%= link_to venue.name, venue.url, target: :_blank %> - <%= venue.address %>, <%=link_to('save', store_venue_user_path(:venue_id => venue.id), class: "link")%></li>
+        <li><img src="https://maps.google.com/mapfiles/ms/icons/blue-dot.png" class="venue-bullet-point"><%= link_to venue.name, venue.url, target: :_blank %> - <%= venue.address %>, <%=link_to('save', store_venue_user_path(:venue_id => venue.id), class: "link")%></li>
       <% end %>
       <!-- tried and failed to have link/button add venue to that user's profile page -->
     </ul>
@@ -50,7 +50,7 @@
               "lng":<%= @venue_location.longitude%>,
               "infowindow": "<a href=<%=venue.url%>><%=venue.name%></a> is at <%=@venue_location.address%>",
               "picture": {
-                url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+                url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
                 width:  36,
                 height: 36
               }
