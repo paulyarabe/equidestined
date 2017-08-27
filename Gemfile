@@ -37,6 +37,8 @@ gem 'better_errors'
 gem 'geocoder'
 gem 'json'
 gem 'http'
+gem 'pry'
+gem 'pg'
 
 
 gem 'httparty'
@@ -64,12 +66,9 @@ group :development do
 end
 
 group :production do
-  gem 'pg'
 end
 
 group :development, :test do
-  # gem 'sqlite3'
-  gem 'pg'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
