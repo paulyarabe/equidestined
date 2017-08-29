@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20170717221417) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "follows", force: :cascade do |t|
     t.integer "user_id"
     t.integer "following_id"
@@ -83,7 +86,7 @@ ActiveRecord::Schema.define(version: 20170717221417) do
     t.string "name"
     t.string "address"
     t.string "category"
-    t.integer "rating"
+    t.float "rating"
     t.float "latitude"
     t.float "longitude"
     t.string "url"
